@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-public class Checker {
-    @AfterThrowing(value = "execution(* service.*Service.*(..))",throwing = "ex")
+public class ErrorChecker {
+    @AfterThrowing(value = "execution(* service.*ErrorService.*(..))",throwing = "ex")
     public void ErrorChecker(JoinPoint joinPoint, Throwable ex) throws Throwable{
         String methodName = joinPoint.getSignature().getName();
 
