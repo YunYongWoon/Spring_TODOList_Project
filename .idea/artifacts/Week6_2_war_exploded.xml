@@ -80,6 +80,7 @@
           <element id="library" level="project" name="Maven: org.springframework.plugin:spring-plugin-metadata:1.2.0.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:3.2.18.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-tx:3.2.18.RELEASE" />
+          <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.8.5" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="Spring_TODO_Project/web/Web" />

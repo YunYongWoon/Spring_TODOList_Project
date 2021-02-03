@@ -33,7 +33,7 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo(){
         return new ApiInfoBuilder()
-                .title("Beginner_Example_API_document")
+                .title("TODO_List_API_document")
                 .description("API 설명")
                 .version("1.0.0")
                 .build();
