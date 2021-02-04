@@ -6,7 +6,8 @@
     <insert id="Register">
         insert into UserDB(ID,password,DB_name) values(#{ID}, #{password}, #{DB_name})
     </insert>
-    <select id="Test" resultType="string">
-        desc UserDB
+    <select id="Login" resultType="domain.User">
+        select * from UserDB where ID = #{ID}
     </select>
+
 </mapper>

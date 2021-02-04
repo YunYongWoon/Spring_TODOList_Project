@@ -17,10 +17,19 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @ApiOperation(value = "Login Test",tags = "Login")
+    @ApiOperation(value = "Register Test",tags = "Register")
     @RequestMapping(value = "/registration",method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity<String> userRegister(User user){
-        return userService.RegisterUser(user) ?
-                new ResponseEntity<>("OK", HttpStatus.OK) : new ResponseEntity<>("Fail", HttpStatus.INTERNAL_SERVER_ERROR);
+        return userService.RegisterUser(user)
+                ? new ResponseEntity<>("OK", HttpStatus.OK)
+                : new ResponseEntity<>("Fail", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ApiOperation(value = "Login Test",tags = "Login", consumes = "application/json")
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public ResponseEntity userLogin(User user){
+        return userService.Login(user)
+                ? new ResponseEntity<>("OK", HttpStatus.OK)
+                : new ResponseEntity<>("Fail", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

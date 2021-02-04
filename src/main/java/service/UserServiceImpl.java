@@ -14,4 +14,15 @@ public class UserServiceImpl implements UserService{
     public boolean RegisterUser(User user) {
         return userMapper.Register(user) == true;
     }
+
+    @Override
+    public boolean Login(User user) {
+        User loginUser = userMapper.Login(user);
+        if(loginUser.getPassword().equals(user.getPassword())){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }
