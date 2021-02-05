@@ -4,9 +4,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="repository.UserMapper">
     <insert id="Register">
-        insert into UserDB(ID,password) values(#{ID}, #{password})
+        insert into Users(User_AccountID,User_Password) values(#{user_accountID}, #{user_password})
     </insert>
     <select id="Login" resultType="domain.User">
-        select * from UserDB where ID = #{ID}
+        select * from Users where User_AccountID = #{user_accountID}
     </select>
 </mapper>

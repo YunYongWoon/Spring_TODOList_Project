@@ -4,34 +4,34 @@ import java.math.BigInteger;
 import java.sql.Timestamp;
 
 public class User {
-    BigInteger User_ID;
-    String User_AccountID;
-    String User_Password;
+    Long user_ID;
+    String user_accountID;
+    String user_password;
     Timestamp created_at;
     Timestamp updated_at;
 
-    public BigInteger getUser_ID() {
-        return User_ID;
+    public Long getUser_ID() {
+        return user_ID;
     }
 
-    public void setUser_ID(BigInteger user_ID) {
-        User_ID = user_ID;
+    public void setUser_ID(Long user_ID) {
+        this.user_ID = user_ID;
     }
 
-    public String getUser_AccountID() {
-        return User_AccountID;
+    public String getUser_accountID() {
+        return user_accountID;
     }
 
-    public void setUser_AccountID(String user_AccountID) {
-        User_AccountID = user_AccountID;
+    public void setUser_accountID(String user_accountID) {
+        this.user_accountID = user_accountID;
     }
 
-    public String getUser_Password() {
-        return User_Password;
+    public String getUser_password() {
+        return user_password;
     }
 
-    public void setUser_Password(String user_Password) {
-        User_Password = user_Password;
+    public void setUser_password(String user_password) {
+        this.user_password = user_password;
     }
 
     public Timestamp getCreated_at() {

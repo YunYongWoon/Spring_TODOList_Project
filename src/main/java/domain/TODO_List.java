@@ -6,9 +6,9 @@ import java.sql.Timestamp;
 public class TODO_List {
     Integer idx;
     enum type{TODO,Progress,Done}
-    String TODO;
-    BigInteger User_ID;
-    Timestamp Due_Time;
+    String todo;
+    Long user_ID;
+    Timestamp due_Time;
     Timestamp created_at;
     Timestamp updated_at;
 
@@ -20,28 +20,28 @@ public class TODO_List {
         this.idx = idx;
     }
 
-    public String getTODO() {
-        return TODO;
+    public String getTodo() {
+        return todo;
     }
 
-    public void setTODO(String TODO) {
-        this.TODO = TODO;
+    public void setTodo(String todo) {
+        this.todo = todo;
     }
 
-    public BigInteger getUser_ID() {
-        return User_ID;
+    public Long getUser_ID() {
+        return user_ID;
     }
 
-    public void setUser_ID(BigInteger user_ID) {
-        User_ID = user_ID;
+    public void setUser_ID(Long user_ID) {
+        this.user_ID = user_ID;
     }
 
     public Timestamp getDue_Time() {
-        return Due_Time;
+        return due_Time;
     }
 
     public void setDue_Time(Timestamp due_Time) {
-        Due_Time = due_Time;
+        this.due_Time = due_Time;
     }
 
     public Timestamp getCreated_at() {
