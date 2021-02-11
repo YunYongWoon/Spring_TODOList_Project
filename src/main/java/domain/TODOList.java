@@ -3,21 +3,29 @@ package domain;
 import java.math.BigInteger;
 import java.sql.Timestamp;
 
-public class TODO_List {
-    Integer idx;
-    enum type{TODO,Progress,Done}
+public class TODOList {
+
+    Long idx;
+    TodoType todoType;
     String todo;
     Long user_ID;
-    Timestamp due_Time;
     Timestamp created_at;
     Timestamp updated_at;
 
-    public Integer getIdx() {
+    public Long getIdx() {
         return idx;
     }
 
-    public void setIdx(Integer idx) {
+    public void setIdx(Long idx) {
         this.idx = idx;
+    }
+
+    public TodoType getTodoType() {
+        return todoType;
+    }
+
+    public void setTodoType(TodoType todoType) {
+        this.todoType = todoType;
     }
 
     public String getTodo() {
@@ -36,14 +44,6 @@ public class TODO_List {
         this.user_ID = user_ID;
     }
 
-    public Timestamp getDue_Time() {
-        return due_Time;
-    }
-
-    public void setDue_Time(Timestamp due_Time) {
-        this.due_Time = due_Time;
-    }
-
     public Timestamp getCreated_at() {
         return created_at;
     }
@@ -58,5 +58,23 @@ public class TODO_List {
 
     public void setUpdated_at(Timestamp updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public enum TodoType{
+        TODO("TODO"),Progress("Progress"),Done("Done");
+
+        private String value;
+
+        TodoType(String value){
+            this.value = value;
+        }
+
+        public String getKey(){
+            return name();
+        }
+
+        public String getValue(){
+            return value;
+        }
     }
 }

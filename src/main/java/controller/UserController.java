@@ -28,6 +28,6 @@ public class UserController {
     public ResponseEntity userLogin(User user){
         return userService.Login(user)
                 ? new ResponseEntity<>("OK", HttpStatus.OK)
-                : new ResponseEntity<>("Fail", HttpStatus.INTERNAL_SERVER_ERROR);
+                : new ResponseEntity<>("Fail", HttpStatus.BAD_REQUEST);
     }
 }
