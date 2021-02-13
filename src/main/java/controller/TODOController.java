@@ -7,9 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import service.TODOService;
+
+import java.util.List;
 
 @Controller
 public class TODOController {
@@ -17,10 +18,16 @@ public class TODOController {
     TODOService todoService;
 
     @ApiOperation(value = "Create TODO List",tags = "Create")
-    @RequestMapping(value = "/addList",method = RequestMethod.POST, consumes = "application/json")
+    @RequestMapping(value = "/create",method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity createList(TODOList todoList){
         return todoService.CreateList(todoList)
                 ? new ResponseEntity<>("OK", HttpStatus.OK)
                 : new ResponseEntity<>("Fail", HttpStatus.BAD_REQUEST);
+    }
+
+    @ApiOperation(value = "Read TODO List",tags = "Read")
+    @RequestMapping(value = "/read",method = RequestMethod.GET)
+    public ResponseEntity<List<TODOList>> readList(Long id){
+        return new ResponseEntity<>(todoService.ReadList(id), HttpStatus.OK);
     }
 }

@@ -1,11 +1,11 @@
 package service;
 
 import domain.TODOList;
-import domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repository.TODOMapper;
-import repository.UserMapper;
+
+import java.util.List;
 
 @Service
 public class TODOServiceImpl implements TODOService {
@@ -18,8 +18,8 @@ public class TODOServiceImpl implements TODOService {
     }
 
     @Override
-    public boolean ReadList(User user) {
-        return false;
+    public List<TODOList> ReadList(Long id) {
+        return todoMapper.Read(id);
     }
 
     @Override
