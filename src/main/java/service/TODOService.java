@@ -8,6 +8,6 @@ import java.util.List;
 public interface TODOService {
     boolean CreateList(TODOList todoList);
     List<TODOList> ReadList(Long id);
-    boolean UpdateList(Long id);
+    boolean UpdateList(TODOList todoList);
     boolean DeleteList(Long id);
 }

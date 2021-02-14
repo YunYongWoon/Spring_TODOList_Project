@@ -10,6 +10,6 @@ import java.util.List;
 public interface TODOMapper {
     boolean Create(TODOList todoList);
     List<TODOList> Read(Long id);
-    boolean Update(Long id);
+    boolean Update(TODOList todoList);
     boolean Delete(Long id);
 }

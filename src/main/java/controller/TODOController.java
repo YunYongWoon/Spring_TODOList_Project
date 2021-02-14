@@ -31,6 +31,14 @@ public class TODOController {
         return new ResponseEntity<>(todoService.ReadList(id), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Update TODO List",tags = "Update")
+    @RequestMapping(value = "/update",method = RequestMethod.POST, consumes = "application/json")
+    public ResponseEntity updateList(TODOList todoList){
+        return todoService.UpdateList(todoList)
+                ? new ResponseEntity<>("OK", HttpStatus.OK)
+                : new ResponseEntity<>("Fail", HttpStatus.BAD_REQUEST);
+    }
+
     @ApiOperation(value = "Delete TODO List",tags = "Delete")
     @RequestMapping(value = "/delete",method = RequestMethod.GET)
     public ResponseEntity deleteList(Long id){

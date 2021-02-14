@@ -23,8 +23,8 @@ public class TODOServiceImpl implements TODOService {
     }
 
     @Override
-    public boolean UpdateList(Long id) {
-        return false;
+    public boolean UpdateList(TODOList todoList) {
+        return todoMapper.Update(todoList) == true;
     }
 
     @Override
