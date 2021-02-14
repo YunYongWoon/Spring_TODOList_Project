@@ -30,4 +30,10 @@ public class TODOController {
     public ResponseEntity<List<TODOList>> readList(Long id){
         return new ResponseEntity<>(todoService.ReadList(id), HttpStatus.OK);
     }
+
+    @ApiOperation(value = "Delete TODO List",tags = "Delete")
+    @RequestMapping(value = "/delete",method = RequestMethod.GET)
+    public ResponseEntity deleteList(Long id){
+        return new ResponseEntity<>(todoService.DeleteList(id), HttpStatus.OK);
+    }
 }

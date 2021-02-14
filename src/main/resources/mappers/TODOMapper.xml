@@ -9,4 +9,7 @@
     <select id="Read" resultType="domain.TODOList">
         select*from TODO_Lists where User_ID = #{user_ID}
     </select>
+    <delete id="Delete">
+        delete from TODO_Lists where idx = #{idx}
+    </delete>
 </mapper>
