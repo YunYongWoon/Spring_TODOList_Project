@@ -28,7 +28,7 @@ public class SwaggerConfig {
     }
 
     private ApiKey apiKey(){
-        return new ApiKey("Authorization(Bearer + jwtToken)", "Authorization", "header");
+        return new ApiKey("Authorization(Bearer +jwtToken)", "Authorization", "header");
     }
 
     private ApiInfo apiInfo(){

@@ -4,6 +4,7 @@ import domain.TODOList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repository.TODOMapper;
+import util.JwtUtil;
 
 import java.util.List;
 
@@ -11,14 +12,18 @@ import java.util.List;
 public class TODOServiceImpl implements TODOService {
     @Autowired
     private TODOMapper todoMapper;
+    @Autowired
+    private JwtUtil jwtUtil;
 
     @Override
     public boolean CreateList(TODOList todoList) {
+        todoList.setUser_ID(jwtUtil.getIdByToken());
         return todoMapper.Create(todoList) == true;
     }
 
     @Override
     public List<TODOList> ReadList(Long id) {
+        id = jwtUtil.getIdByToken();
         return todoMapper.Read(id);
     }
 
@@ -28,7 +33,7 @@ public class TODOServiceImpl implements TODOService {
     }
 
     @Override
-    public boolean DeleteList(Long id) {
-        return todoMapper.Delete(id) == true;
+    public boolean DeleteList(Long idx) {
+        return todoMapper.Delete(idx) == true;
     }
 }

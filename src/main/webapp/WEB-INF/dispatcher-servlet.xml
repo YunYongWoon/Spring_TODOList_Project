@@ -20,6 +20,13 @@
     <mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/"/>
     <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
 
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/api/*/*" />
+            <bean class="interceptor.Interceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+
     <context:component-scan base-package="controller"/>
     <context:component-scan base-package="swagger"/>
 

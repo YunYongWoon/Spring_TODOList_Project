@@ -82,6 +82,12 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-tx:3.2.18.RELEASE" />
           <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.8.5" />
           <element id="library" level="project" name="Maven: org.mindrot:jbcrypt:0.4" />
+          <element id="library" level="project" name="Maven: org.bouncycastle:bcpkix-jdk15on:1.64" />
+          <element id="library" level="project" name="Maven: org.bouncycastle:bcprov-jdk15on:1.64" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-jwt:1.1.1.RELEASE" />
+          <element id="library" level="project" name="Maven: io.jsonwebtoken:jjwt-api:0.10.5" />
+          <element id="library" level="project" name="Maven: io.jsonwebtoken:jjwt-impl:0.10.5" />
+          <element id="library" level="project" name="Maven: io.jsonwebtoken:jjwt-jackson:0.10.5" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="Spring_TODO_Project/web/Web" />
