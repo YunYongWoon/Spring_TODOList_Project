@@ -10,5 +10,4 @@
     <context:component-scan base-package="service"/>
     <context:component-scan base-package="util"/>
     <context:component-scan base-package="repository"/>
-
 </beans>

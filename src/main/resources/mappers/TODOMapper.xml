@@ -6,9 +6,11 @@
     <insert id="Create">
         insert into TODO_Lists(TodoType,TODO,User_ID) values(#{todoType},#{todo},#{user_ID})
     </insert>
+
     <select id="Read" resultType="domain.TODOList">
         select*from TODO_Lists where User_ID = #{user_ID}
     </select>
+
     <update id="Update">
         update TODO_Lists set TodoType = #{todoType}, TODO = #{todo} where idx = #{idx}
     </update>

@@ -88,6 +88,7 @@
           <element id="library" level="project" name="Maven: io.jsonwebtoken:jjwt-api:0.10.5" />
           <element id="library" level="project" name="Maven: io.jsonwebtoken:jjwt-impl:0.10.5" />
           <element id="library" level="project" name="Maven: io.jsonwebtoken:jjwt-jackson:0.10.5" />
+          <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.9" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="Spring_TODO_Project/web/Web" />
