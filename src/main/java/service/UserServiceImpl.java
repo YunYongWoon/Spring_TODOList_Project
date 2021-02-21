@@ -17,16 +17,16 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public boolean RegisterUser(User user) {
-        String bcryptPassword = BCrypt.hashpw(user.getUser_password(),BCrypt.gensalt());
-        user.setUser_password(bcryptPassword);
+        String bcryptPassword = BCrypt.hashpw(user.getPassword(),BCrypt.gensalt());
+        user.setPassword(bcryptPassword);
         return userMapper.Register(user) == true;
     }
 
     @Override
     public String Login(User user) {
         User loginUser = userMapper.Login(user);
-        if(BCrypt.checkpw(user.getUser_password(),loginUser.getUser_password())){
-            String token = jwtUtil.generateToken(loginUser.getUser_ID());
+        if(BCrypt.checkpw(user.getPassword(),loginUser.getPassword())){
+            String token = jwtUtil.generateToken(loginUser.getID());
             return token;
         }
         else
