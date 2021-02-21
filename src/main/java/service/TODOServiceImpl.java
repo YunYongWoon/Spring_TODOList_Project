@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repository.TODOMapper;
 import util.JwtUtil;
+import util.TimeUtil;
 
 import java.util.List;
 
@@ -14,10 +15,13 @@ public class TODOServiceImpl implements TODOService {
     private TODOMapper todoMapper;
     @Autowired
     private JwtUtil jwtUtil;
+    @Autowired
+    private TimeUtil timeUtil;
 
     @Override
-    public boolean CreateList(TODOList todoList) {
+    public boolean CreateList(TODOList todoList,String schedule) {
         todoList.setUser_ID(jwtUtil.getIdByToken());
+        todoList.setScheduled_at(timeUtil.getStringToTimestamp(schedule));
         return todoMapper.Create(todoList) == true;
     }
 

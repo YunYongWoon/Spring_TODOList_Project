@@ -18,8 +18,8 @@ public class TODOController {
 
     @ApiOperation(value = "Create TODO List",tags = "TODO")
     @RequestMapping(value = "/api/create",method = RequestMethod.POST, consumes = "application/json")
-    public ResponseEntity createList(TODOList todoList){
-        return todoService.CreateList(todoList)
+    public ResponseEntity createList(TODOList todoList,String schedule){
+        return todoService.CreateList(todoList, schedule)
                 ? new ResponseEntity<>("OK", HttpStatus.OK)
                 : new ResponseEntity<>("Fail", HttpStatus.BAD_REQUEST);
     }

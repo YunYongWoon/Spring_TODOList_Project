@@ -1,23 +1,25 @@
 package domain;
 
-import java.math.BigInteger;
 import java.sql.Timestamp;
+import java.util.Date;
 
 public class TODOList {
-
-    Long idx;
+    Long id;
     TodoType todoType;
     String todo;
     Long user_ID;
+    Timestamp scheduled_at;
     Timestamp created_at;
     Timestamp updated_at;
+    boolean is_deleted;
+    Timestamp deleted_at;
 
-    public Long getIdx() {
-        return idx;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdx(Long idx) {
-        this.idx = idx;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public TodoType getTodoType() {
@@ -44,6 +46,14 @@ public class TODOList {
         this.user_ID = user_ID;
     }
 
+    public Date getScheduled_at() {
+        return scheduled_at;
+    }
+
+    public void setScheduled_at(Timestamp scheduled_at) {
+        this.scheduled_at = scheduled_at;
+    }
+
     public Timestamp getCreated_at() {
         return created_at;
     }
@@ -58,6 +68,22 @@ public class TODOList {
 
     public void setUpdated_at(Timestamp updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public boolean isIs_deleted() {
+        return is_deleted;
+    }
+
+    public void setIs_deleted(boolean is_deleted) {
+        this.is_deleted = is_deleted;
+    }
+
+    public Timestamp getDeleted_at() {
+        return deleted_at;
+    }
+
+    public void setDeleted_at(Timestamp deleted_at) {
+        this.deleted_at = deleted_at;
     }
 
     public enum TodoType{
