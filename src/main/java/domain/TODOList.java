@@ -13,6 +13,7 @@ public class TODOList {
     Timestamp updated_at;
     boolean is_deleted;
     boolean is_finished;
+    boolean is_achieved;
 
     public Long getId() {
         return id;
@@ -84,6 +85,14 @@ public class TODOList {
 
     public void setIs_finished(boolean is_finished) {
         this.is_finished = is_finished;
+    }
+
+    public boolean isIs_achieved() {
+        return is_achieved;
+    }
+
+    public void setIs_achieved(boolean is_archieved) {
+        this.is_achieved = is_archieved;
     }
 
     public enum TodoType{

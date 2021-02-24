@@ -30,9 +30,9 @@ public class TODOServiceImpl implements TODOService {
     }
 
     @Override
-    public List<TODOList> ReadList(Long id) {
-        id = jwtUtil.getIdByToken();
-        return todoMapper.Read(id);
+    public List<TODOList> ReadList(Long user_id) {
+        user_id = jwtUtil.getIdByToken();
+        return todoMapper.Read(user_id);
     }
 
     @Override
@@ -49,7 +49,18 @@ public class TODOServiceImpl implements TODOService {
     }
 
     @Override
-    public boolean DeleteList(Long idx) {
-        return todoMapper.Delete(idx) == true;
+    public boolean DeleteList(Long id) {
+        return todoMapper.Delete(id) == true;
+    }
+
+    @Override
+    public boolean AchieveList(Long id) {
+        return todoMapper.Achieve(id) == true;
+    }
+
+    @Override
+    public List<TODOList> ReadArchieve(Long user_id) {
+        user_id = jwtUtil.getIdByToken();
+        return todoMapper.readArchieve(user_id);
     }
 }

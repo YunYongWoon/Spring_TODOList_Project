@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import service.TODOService;
+import sun.security.krb5.internal.crypto.RsaMd5CksumType;
 
 import java.util.List;
 
@@ -26,8 +27,8 @@ public class TODOController {
 
     @ApiOperation(value = "Read TODO List",tags = "TODO")
     @RequestMapping(value = "/api/read",method = RequestMethod.GET)
-    public ResponseEntity<List<TODOList>> readList(Long id){
-        return new ResponseEntity<>(todoService.ReadList(id), HttpStatus.OK);
+    public ResponseEntity<List<TODOList>> readList(Long user_id){
+        return new ResponseEntity<>(todoService.ReadList(user_id), HttpStatus.OK);
     }
 
     @ApiOperation(value = "Update TODO List",tags = "TODO")
@@ -42,5 +43,17 @@ public class TODOController {
     @RequestMapping(value = "/delete",method = RequestMethod.PATCH)
     public ResponseEntity deleteList(Long id){
         return new ResponseEntity<>(todoService.DeleteList(id), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Achieve TODO List",tags = "TODO")
+    @RequestMapping(value = "/achieve",method = RequestMethod.PATCH)
+    public ResponseEntity achieveList(Long id){
+        return new ResponseEntity<>(todoService.AchieveList(id), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Read Archieve",tags = "TODO")
+    @RequestMapping(value = "/api/archieve",method = RequestMethod.GET)
+    public ResponseEntity readArchieve(Long user_id){
+        return new ResponseEntity(todoService.ReadArchieve(user_id),HttpStatus.OK);
     }
 }

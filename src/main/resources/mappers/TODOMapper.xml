@@ -8,7 +8,7 @@
     </insert>
 
     <select id="Read" resultType="domain.TODOList">
-        select*from TODO_Lists where User_ID = #{user_ID} AND is_deleted = 0
+        select*from TODO_Lists where User_ID = #{user_ID} AND is_deleted = 0 AND is_achieved = 0
     </select>
 
     <update id="Update">
@@ -16,10 +16,18 @@
     </update>
 
     <update id="Delete">
-        update TODO_Lists set is_deleted = 1, deleted_at = now() where id = #{id}
+        update TODO_Lists set is_deleted = 1 where id = #{id}
     </update>
 
     <select id="getTime">
         select scheduled_at from TODO_Lists where id = {id};
+    </select>
+
+    <update id="Achieve">
+        update TODO_Lists set is_achieved = 1 where id = #{id};
+    </update>
+
+    <select id="readArchieve" resultType="domain.TODOList">
+        select*from TODO_Lists where User_ID = #{user_ID} AND is_achieved = 1
     </select>
 </mapper>
