@@ -22,7 +22,11 @@ public class TODOServiceImpl implements TODOService {
     public boolean CreateList(TODOList todoList,String schedule) {
         todoList.setUser_ID(jwtUtil.getIdByToken());
         todoList.setScheduled_at(timeUtil.getStringToTimestamp(schedule));
-        return todoMapper.Create(todoList) == true;
+        if(todoList == null || todoList.getScheduled_at() == null) {
+            return false;
+        }
+        else
+            return todoMapper.Create(todoList) == true;
     }
 
     @Override
@@ -32,8 +36,16 @@ public class TODOServiceImpl implements TODOService {
     }
 
     @Override
-    public boolean UpdateList(TODOList todoList) {
-        return todoMapper.Update(todoList) == true;
+    public boolean UpdateList(TODOList todoList, String schedule) {
+        if(schedule == null)
+            todoList.setScheduled_at(todoMapper.getTime(todoList.getId()));
+        else
+            todoList.setScheduled_at(timeUtil.getStringToTimestamp(schedule));
+
+        if(todoList == null)
+            return false;
+        else
+            return todoMapper.Update(todoList) == true;
     }
 
     @Override

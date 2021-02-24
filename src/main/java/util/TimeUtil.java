@@ -2,7 +2,6 @@ package util;
 
 import org.springframework.stereotype.Component;
 
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;

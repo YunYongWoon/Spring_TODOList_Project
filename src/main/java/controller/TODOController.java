@@ -18,7 +18,7 @@ public class TODOController {
 
     @ApiOperation(value = "Create TODO List",tags = "TODO")
     @RequestMapping(value = "/api/create",method = RequestMethod.POST, consumes = "application/json")
-    public ResponseEntity createList(TODOList todoList,String schedule){
+    public ResponseEntity createList(TODOList todoList, String schedule){
         return todoService.CreateList(todoList, schedule)
                 ? new ResponseEntity<>("OK", HttpStatus.OK)
                 : new ResponseEntity<>("Fail", HttpStatus.BAD_REQUEST);
@@ -31,15 +31,15 @@ public class TODOController {
     }
 
     @ApiOperation(value = "Update TODO List",tags = "TODO")
-    @RequestMapping(value = "/update",method = RequestMethod.POST, consumes = "application/json")
-    public ResponseEntity updateList(TODOList todoList){
-        return todoService.UpdateList(todoList)
+    @RequestMapping(value = "/update",method = RequestMethod.PATCH, consumes = "application/json")
+    public ResponseEntity updateList(TODOList todoList, String schedule){
+        return todoService.UpdateList(todoList, schedule)
                 ? new ResponseEntity<>("OK", HttpStatus.OK)
                 : new ResponseEntity<>("Fail", HttpStatus.BAD_REQUEST);
     }
 
     @ApiOperation(value = "Delete TODO List",tags = "TODO")
-    @RequestMapping(value = "/delete",method = RequestMethod.GET)
+    @RequestMapping(value = "/delete",method = RequestMethod.PATCH)
     public ResponseEntity deleteList(Long id){
         return new ResponseEntity<>(todoService.DeleteList(id), HttpStatus.OK);
     }

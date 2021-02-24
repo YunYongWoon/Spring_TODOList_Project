@@ -12,7 +12,7 @@ public class TODOList {
     Timestamp created_at;
     Timestamp updated_at;
     boolean is_deleted;
-    Timestamp deleted_at;
+    boolean is_finished;
 
     public Long getId() {
         return id;
@@ -78,12 +78,12 @@ public class TODOList {
         this.is_deleted = is_deleted;
     }
 
-    public Timestamp getDeleted_at() {
-        return deleted_at;
+    public boolean isIs_finished() {
+        return is_finished;
     }
 
-    public void setDeleted_at(Timestamp deleted_at) {
-        this.deleted_at = deleted_at;
+    public void setIs_finished(boolean is_finished) {
+        this.is_finished = is_finished;
     }
 
     public enum TodoType{

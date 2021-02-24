@@ -12,10 +12,14 @@
     </select>
 
     <update id="Update">
-        update TODO_Lists set TodoType = #{todoType}, TODO = #{todo} where id = #{id}
+        update TODO_Lists set TodoType = #{todoType}, TODO = #{todo}, scheduled_at = #{scheduled_at} where id = #{id}
     </update>
 
     <update id="Delete">
         update TODO_Lists set is_deleted = 1, deleted_at = now() where id = #{id}
     </update>
+
+    <select id="getTime">
+        select scheduled_at from TODO_Lists where id = {id};
+    </select>
 </mapper>
