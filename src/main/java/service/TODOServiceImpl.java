@@ -32,6 +32,7 @@ public class TODOServiceImpl implements TODOService {
     @Override
     public List<TODOList> ReadList(Long user_id) {
         user_id = jwtUtil.getIdByToken();
+        todoMapper.checkSchedule(user_id);
         return todoMapper.Read(user_id);
     }
 

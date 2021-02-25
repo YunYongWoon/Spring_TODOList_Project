@@ -13,6 +13,7 @@ public interface TODOMapper {
     List<TODOList> Read(Long user_id);
     boolean Update(TODOList todoList);
     boolean Delete(Long id);
+    void checkSchedule(Long id);
     Timestamp getTime(Long user_id);
     boolean Achieve(Long id);
     List<TODOList> readArchieve(Long user_id);
