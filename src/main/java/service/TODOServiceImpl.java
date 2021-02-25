@@ -38,11 +38,6 @@ public class TODOServiceImpl implements TODOService {
 
     @Override
     public boolean UpdateList(TODOList todoList, String schedule) {
-        if(schedule == null)
-            todoList.setScheduled_at(todoMapper.getTime(todoList.getId()));
-        else
-            todoList.setScheduled_at(timeUtil.getStringToTimestamp(schedule));
-
         if(todoList == null)
             return false;
         else
