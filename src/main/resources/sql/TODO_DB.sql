@@ -9,5 +9,3 @@ create table TODO_Lists(
                            is_deleted boolean not null default 0,
                            is_finished boolean not null default 0,
                            is_archieved boolean not null default 0);
-
-ㅂ

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserMapper {
-    boolean Register(User user);
+    void Register(User user);
     User Login(User user);
+    User Check_ID(String accountID);
 }

@@ -9,4 +9,7 @@
     <select id="Login" resultType="domain.User">
         select * from Users where AccountID = #{accountID}
     </select>
+    <select id="CheckID" resultType="String">
+        select accountID from Usere where AccountID = #{accountID}
+    </select>
 </mapper>

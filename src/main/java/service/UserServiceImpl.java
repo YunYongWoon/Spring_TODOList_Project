@@ -15,16 +15,25 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private JwtUtil jwtUtil;
 
+    //회원가입
     @Override
     public boolean RegisterUser(User user) {
-        String bcryptPassword = BCrypt.hashpw(user.getPassword(),BCrypt.gensalt());
-        user.setPassword(bcryptPassword);
-        return userMapper.Register(user) == true;
+        // DB에 같은 아이디가 없으면 성공
+        if(!user.getAccountID().equals(CheckID(user))) {
+            String bcryptPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+            user.setPassword(bcryptPassword);
+            userMapper.Register(user);
+            return true;
+        }
+        else
+            return false;
     }
 
+    // 로그인
     @Override
     public String Login(User user) {
         User loginUser = userMapper.Login(user);
+        // 비밀번호가 같으면 성공
         if(BCrypt.checkpw(user.getPassword(),loginUser.getPassword())){
             String token = jwtUtil.generateToken(loginUser.getID());
             return token;
@@ -32,4 +41,10 @@ public class UserServiceImpl implements UserService{
         else
             return null;
     }
+
+    // ID 존재유무 체크
+    private User CheckID(User user){
+        return userMapper.Check_ID(user.getAccountID());
+    }
+
 }

@@ -22,7 +22,7 @@ public class TODOServiceImpl implements TODOService {
     public boolean CreateList(TODOList todoList,String schedule) {
         todoList.setUser_ID(jwtUtil.getIdByToken());
         todoList.setScheduled_at(timeUtil.getStringToTimestamp(schedule));
-        if(todoList == null || todoList.getScheduled_at() == null) {
+        if(todoList == null) {
             return false;
         }
         else

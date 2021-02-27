@@ -1,11 +1,15 @@
 package domain;
 
-import java.math.BigInteger;
+import javax.validation.constraints.*;
 import java.sql.Timestamp;
 
 public class User {
     Long ID;
+    @Size(min=6,max=16)
+    @Pattern(regexp = "[a-zA-Z0-9]+")
     String accountID;
+    @Size(min=6,max=16)
+    @Pattern(regexp = "[a-zA-Z0-9~!@#$%^&*()]+")
     String password;
     Timestamp created_at;
     Timestamp updated_at;

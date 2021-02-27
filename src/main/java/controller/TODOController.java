@@ -18,7 +18,7 @@ public class TODOController {
     TODOService todoService;
 
     @ApiOperation(value = "Create TODO List",tags = "TODO")
-    @RequestMapping(value = "/api/create",method = RequestMethod.POST, consumes = "application/json")
+    @RequestMapping(value = "/api/list",method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity createList(TODOList todoList, String schedule){
         return todoService.CreateList(todoList, schedule)
                 ? new ResponseEntity<>("OK", HttpStatus.OK)
@@ -26,13 +26,13 @@ public class TODOController {
     }
 
     @ApiOperation(value = "Read TODO List",tags = "TODO")
-    @RequestMapping(value = "/api/read",method = RequestMethod.GET)
+    @RequestMapping(value = "/api/list",method = RequestMethod.GET)
     public ResponseEntity<List<TODOList>> readList(Long user_id){
         return new ResponseEntity<>(todoService.ReadList(user_id), HttpStatus.OK);
     }
 
     @ApiOperation(value = "Update TODO List",tags = "TODO")
-    @RequestMapping(value = "/update",method = RequestMethod.PATCH, consumes = "application/json")
+    @RequestMapping(value = "/list",method = RequestMethod.PATCH, consumes = "application/json")
     public ResponseEntity updateList(TODOList todoList, String schedule){
         return todoService.UpdateList(todoList, schedule)
                 ? new ResponseEntity<>("OK", HttpStatus.OK)
@@ -40,13 +40,13 @@ public class TODOController {
     }
 
     @ApiOperation(value = "Delete TODO List",tags = "TODO")
-    @RequestMapping(value = "/delete",method = RequestMethod.PATCH)
+    @RequestMapping(value = "/list",method = RequestMethod.DELETE)
     public ResponseEntity deleteList(Long id){
         return new ResponseEntity<>(todoService.DeleteList(id), HttpStatus.OK);
     }
 
     @ApiOperation(value = "Achieve TODO List",tags = "TODO")
-    @RequestMapping(value = "/achieve",method = RequestMethod.PATCH)
+    @RequestMapping(value = "/archieve",method = RequestMethod.PATCH)
     public ResponseEntity achieveList(Long id){
         return new ResponseEntity<>(todoService.AchieveList(id), HttpStatus.OK);
     }

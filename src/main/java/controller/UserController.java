@@ -1,32 +1,44 @@
 package controller;
 
 import domain.User;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import service.UserService;
+
+import javax.validation.Valid;
 
 @Controller
 public class UserController {
     @Autowired
     UserService userService;
 
+    @ResponseBody
     @ApiOperation(value = "Register Test",tags = "User")
     @RequestMapping(value = "/registration",method = RequestMethod.POST, consumes = "application/json")
-    public ResponseEntity<String> userRegister(User user){
+    public ResponseEntity<String> userRegister(@ApiParam(value = "required : accountID, password", required = true) @RequestBody @Valid User user){
         return userService.RegisterUser(user)
                 ? new ResponseEntity<>("OK", HttpStatus.OK)
-                : new ResponseEntity<>("Fail", HttpStatus.INTERNAL_SERVER_ERROR);
+                : new ResponseEntity<>("Register Fail", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ApiOperation(value = "Login Test",tags = "User", consumes = "application/json")
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity userLogin(User user){
+    @ResponseBody
+    @ApiOperation(value = "Login Test",tags = "User")
+    @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = "application/json")
+    public ResponseEntity userLogin(@ApiParam(value = "required : accountID, password", required = true) @RequestBody @Valid User user){
         String token = userService.Login(user);
-        return new ResponseEntity<>(token, HttpStatus.OK);
+        if(token != null)
+            return new ResponseEntity<>(token, HttpStatus.OK);
+        else
+            return new ResponseEntity<>("login Failed",HttpStatus.BAD_REQUEST);
     }
 }
