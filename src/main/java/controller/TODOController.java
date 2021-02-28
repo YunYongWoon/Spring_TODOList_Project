@@ -2,6 +2,7 @@ package controller;
 
 import domain.TODOList;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import service.TODOService;
 import sun.security.krb5.internal.crypto.RsaMd5CksumType;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -18,15 +20,18 @@ public class TODOController {
     TODOService todoService;
 
     //TodoList 생성
+    @ResponseBody
     @ApiOperation(value = "Create TODO List",tags = "TODO")
     @RequestMapping(value = "/api/list",method = RequestMethod.POST, consumes = "application/json")
-    public ResponseEntity createList(TODOList todoList, String schedule){
+    public ResponseEntity createList(
+            @RequestBody @ApiParam(value = "(required: TodoType,Todo(200))", required = true) @Valid TODOList todoList, String schedule){
         return todoService.CreateList(todoList, schedule)
                 ? new ResponseEntity<>("OK", HttpStatus.OK)
-                : new ResponseEntity<>("Fail", HttpStatus.BAD_REQUEST);
+                : new ResponseEntity<>("Create Fail", HttpStatus.BAD_REQUEST);
     }
 
     //TodoList 조회
+    @ResponseBody
     @ApiOperation(value = "Read TODO List",tags = "TODO")
     @RequestMapping(value = "/api/list",method = RequestMethod.GET)
     public ResponseEntity<List<TODOList>> readList(){
@@ -34,33 +39,38 @@ public class TODOController {
     }
 
     //TodoList 수정
+    @ResponseBody
     @ApiOperation(value = "Update TODO List",tags = "TODO")
     @RequestMapping(value = "/list",method = RequestMethod.PATCH, consumes = "application/json")
-    public ResponseEntity updateList(TODOList todoList, String schedule){
+    public ResponseEntity updateList(
+            @RequestBody @ApiParam(value = "(required: id,TodoType,Todo)", required = true) @Valid TODOList todoList, String schedule){
         return todoService.UpdateList(todoList, schedule)
                 ? new ResponseEntity<>("OK", HttpStatus.OK)
-                : new ResponseEntity<>("Fail", HttpStatus.BAD_REQUEST);
+                : new ResponseEntity<>("Update Fail", HttpStatus.BAD_REQUEST);
     }
 
     //TodoList 삭제
+    @ResponseBody
     @ApiOperation(value = "Delete TODO List",tags = "TODO")
-    @RequestMapping(value = "/list",method = RequestMethod.DELETE)
-    public ResponseEntity deleteList(Long id){
+    @RequestMapping(value = "/list/{id}",method = RequestMethod.DELETE)
+    public ResponseEntity deleteList(@PathVariable("id") Long id){
         return todoService.DeleteList(id)
-                ? new ResponseEntity<>("삭제 성공", HttpStatus.OK)
-                : new ResponseEntity<>("Failed",HttpStatus.BAD_REQUEST);
+                ? new ResponseEntity<>("OK", HttpStatus.OK)
+                : new ResponseEntity<>("Delete Failed",HttpStatus.BAD_REQUEST);
     }
 
     //TodoList -> Archieve
+    @ResponseBody
     @ApiOperation(value = "Achieve TODO List",tags = "TODO")
-    @RequestMapping(value = "/archieve",method = RequestMethod.PATCH)
-    public ResponseEntity achieveList(Long id){
+    @RequestMapping(value = "/archieve/{id}",method = RequestMethod.PATCH)
+    public ResponseEntity achieveList(@PathVariable("id") Long id){
         return todoService.AchieveList(id)
                 ? new ResponseEntity<>("OK", HttpStatus.OK)
-                : new ResponseEntity<>("Failed",HttpStatus.BAD_REQUEST);
+                : new ResponseEntity<>("Achieve Failed",HttpStatus.BAD_REQUEST);
     }
 
     //Archieve 조회
+    @ResponseBody
     @ApiOperation(value = "Read Archieve",tags = "TODO")
     @RequestMapping(value = "/api/archieve",method = RequestMethod.GET)
     public ResponseEntity readArchieve(){

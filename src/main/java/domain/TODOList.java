@@ -1,5 +1,7 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -7,10 +9,14 @@ import java.util.Date;
 public class TODOList {
     Long id;
     TodoType todoType;
+    @Size(min=1,max=200)
     String todo;
     Long user_ID;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     Timestamp scheduled_at;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     Timestamp created_at;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     Timestamp updated_at;
     boolean is_deleted;
     boolean is_finished;
