@@ -25,7 +25,7 @@ public class TODOServiceImpl implements TODOService {
         if(schedule != null)
             todoList.setScheduled_at(timeUtil.getStringToTimestamp(schedule));
 
-        if(todoList.getId() == null || todoList.getTodo() == null || todoList.getTodoType() == null) {
+        if(todoList.getUser_ID() == null || todoList.getTodo() == null || todoList.getTodoType() == null) {
             return false;
         }
         else {
