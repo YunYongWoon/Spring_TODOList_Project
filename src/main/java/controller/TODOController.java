@@ -24,8 +24,8 @@ public class TODOController {
     @ApiOperation(value = "Create TODO List",tags = "TODO")
     @RequestMapping(value = "/api/list",method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity createList(
-            @RequestBody @ApiParam(value = "(required: TodoType,Todo(200))", required = true) @Valid TODOList todoList, String schedule){
-        return todoService.CreateList(todoList, schedule)
+            @RequestBody @ApiParam(value = "(required: TodoType,Todo(200))", required = true) @Valid TODOList todoList){
+        return todoService.CreateList(todoList)
                 ? new ResponseEntity<>("OK", HttpStatus.OK)
                 : new ResponseEntity<>("Create Fail", HttpStatus.BAD_REQUEST);
     }
@@ -43,8 +43,8 @@ public class TODOController {
     @ApiOperation(value = "Update TODO List",tags = "TODO")
     @RequestMapping(value = "/list",method = RequestMethod.PATCH, consumes = "application/json")
     public ResponseEntity updateList(
-            @RequestBody @ApiParam(value = "(required: id,TodoType,Todo)", required = true) @Valid TODOList todoList, String schedule){
-        return todoService.UpdateList(todoList, schedule)
+            @RequestBody @ApiParam(value = "(required: id,TodoType,Todo)", required = true) @Valid TODOList todoList){
+        return todoService.UpdateList(todoList)
                 ? new ResponseEntity<>("OK", HttpStatus.OK)
                 : new ResponseEntity<>("Update Fail", HttpStatus.BAD_REQUEST);
     }
