@@ -9,12 +9,13 @@ import java.util.List;
 
 @Repository
 public interface TODOMapper {
-    boolean Create(TODOList todoList);
+    void Create(TODOList todoList);
     List<TODOList> Read(Long user_id);
-    boolean Update(TODOList todoList);
-    boolean Delete(Long id);
-    void checkSchedule(Long id);
+    void Update(TODOList todoList);
+    void Delete(Long id);
+    void checkScheduleTrue(Long id);
+    void checkScheduleFalse(Long id);
     Timestamp getTime(Long user_id);
-    boolean Achieve(Long id);
+    void Achieve(Long id);
     List<TODOList> readArchieve(Long user_id);
 }

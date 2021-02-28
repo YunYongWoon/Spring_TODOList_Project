@@ -31,8 +31,14 @@
         select*from TODO_Lists where User_ID = #{user_ID} AND is_achieved = 1
     </select>
 
-    <update id="checkSchedule">
+    <update id="checkScheduleTrue">
         update TODO_Lists set is_finished = 1
         where user_id = #{user_id} AND scheduled_at &lt; now() AND is_deleted = 0 AND is_achieved = 0
+    </update>
+
+    <update id="checkScheduleFalse">
+        update TODO_Lists set is_finished = 0
+        where user_id = #{user_id} AND scheduled_at > now() AND is_deleted = 0 AND is_achieved = 0
+        OR user_id = #{user_id} AND scheduled_at is null AND is_deleted = 0 AND is_achieved = 0
     </update>
 </mapper>

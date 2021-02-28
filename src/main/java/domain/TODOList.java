@@ -1,5 +1,6 @@
 package domain;
 
+import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 import java.util.Date;
 

@@ -18,45 +18,79 @@ public class TODOServiceImpl implements TODOService {
     @Autowired
     private TimeUtil timeUtil;
 
+    //TodoList 생성
     @Override
     public boolean CreateList(TODOList todoList,String schedule) {
         todoList.setUser_ID(jwtUtil.getIdByToken());
-        todoList.setScheduled_at(timeUtil.getStringToTimestamp(schedule));
-        if(todoList == null) {
+        if(schedule != null)
+            todoList.setScheduled_at(timeUtil.getStringToTimestamp(schedule));
+
+        if(todoList.getId() == null || todoList.getTodo() == null || todoList.getTodoType() == null) {
             return false;
         }
-        else
-            return todoMapper.Create(todoList) == true;
+        else {
+            todoMapper.Create(todoList);
+            return true;
+        }
     }
 
+    //TodoList 조회
     @Override
-    public List<TODOList> ReadList(Long user_id) {
-        user_id = jwtUtil.getIdByToken();
-        todoMapper.checkSchedule(user_id);
-        return todoMapper.Read(user_id);
+    public List<TODOList> ReadList() {
+        Long user_id = jwtUtil.getIdByToken();
+        if(user_id != null) {
+            // 일정 지난게 있으면 알
+            todoMapper.checkScheduleTrue(user_id);
+            // 일정 변경 후 false로 변경
+            todoMapper.checkScheduleFalse(user_id);
+            return todoMapper.Read(user_id);
+        }
+        else
+            return null;
     }
 
+    //TodoList 수정
     @Override
     public boolean UpdateList(TODOList todoList, String schedule) {
-        if(todoList == null)
+        if(schedule != null)
+            todoList.setScheduled_at(timeUtil.getStringToTimestamp(schedule));
+
+        if(todoList.getId() == null || todoList.getTodo() == null || todoList.getTodoType() == null)
             return false;
-        else
-            return todoMapper.Update(todoList) == true;
+        else{
+            todoMapper.Update(todoList);
+            return true;
+        }
     }
 
+    //TodoList 삭제(Soft Delete)
     @Override
     public boolean DeleteList(Long id) {
-        return todoMapper.Delete(id) == true;
+        if(id != null) {
+            todoMapper.Delete(id);
+            return true;
+        }
+        else
+            return false;
     }
 
     @Override
     public boolean AchieveList(Long id) {
-        return todoMapper.Achieve(id) == true;
+        if(id != null) {
+            todoMapper.Achieve(id);
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     @Override
-    public List<TODOList> ReadArchieve(Long user_id) {
-        user_id = jwtUtil.getIdByToken();
-        return todoMapper.readArchieve(user_id);
+    public List<TODOList> ReadArchieve() {
+        Long user_id = jwtUtil.getIdByToken();
+        if(user_id == null)
+            return null;
+        else
+            return todoMapper.readArchieve(user_id);
     }
 }
