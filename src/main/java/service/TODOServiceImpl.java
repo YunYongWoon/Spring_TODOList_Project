@@ -34,7 +34,7 @@ public class TODOServiceImpl implements TODOService {
     public List<TODOList> ReadList() {
         Long user_id = jwtUtil.getIdByToken();
         if(user_id != null) {
-            // 일정 지난게 있으면 알
+            // 일정 지난게 있으면 알림
             todoMapper.checkScheduleTrue(user_id);
             // 일정 변경 후 false로 변경
             todoMapper.checkScheduleFalse(user_id);
