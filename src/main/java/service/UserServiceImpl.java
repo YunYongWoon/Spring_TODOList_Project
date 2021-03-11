@@ -18,15 +18,10 @@ public class UserServiceImpl implements UserService{
     //회원가입
     @Override
     public boolean RegisterUser(User user) {
-        // DB에 같은 아이디가 없으면 성공
-        if(!user.getAccountID().equals(CheckID(user))) {
-            String bcryptPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
-            user.setPassword(bcryptPassword);
-            userMapper.Register(user);
-            return true;
-        }
-        else
-            return false;
+        String bcryptPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+        user.setPassword(bcryptPassword);
+        userMapper.Register(user);
+        return true;
     }
 
     // 로그인
@@ -41,10 +36,4 @@ public class UserServiceImpl implements UserService{
         else
             return null;
     }
-
-    // ID 존재유무 체크
-    private User CheckID(User user){
-        return userMapper.Check_ID(user.getAccountID());
-    }
-
 }
