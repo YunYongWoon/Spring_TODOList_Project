@@ -10,6 +10,6 @@
         SELECT * FROM Users WHERE AccountID = #{accountID}
     </select>
     <select id="CheckID" resultType="domain.User">
-        SELECT accountID FROM Usere WHERE AccountID = #{accountID}
+        SELECT accountID FROM Users WHERE AccountID = #{accountID}
     </select>
 </mapper>

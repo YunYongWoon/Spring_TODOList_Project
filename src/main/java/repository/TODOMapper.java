@@ -15,7 +15,6 @@ public interface TODOMapper {
     void Delete(Long id);
     void checkScheduleTrue(Long id);
     void checkScheduleFalse(Long id);
-    Timestamp getTime(Long user_id);
     void Achieve(Long id);
     List<TODOList> readArchieve(Long user_id);
 }

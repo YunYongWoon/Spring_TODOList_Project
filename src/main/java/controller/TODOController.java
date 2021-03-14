@@ -25,9 +25,8 @@ public class TODOController {
     @RequestMapping(value = "/api/list",method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity createList(
             @RequestBody @ApiParam(value = "(required: TodoType,Todo(200))", required = true) @Valid TODOList todoList){
-        return todoService.CreateList(todoList)
-                ? new ResponseEntity<>("OK", HttpStatus.OK)
-                : new ResponseEntity<>("Create Fail", HttpStatus.BAD_REQUEST);
+        todoService.CreateList(todoList);
+        return new ResponseEntity<>("List is Created", HttpStatus.OK);
     }
 
     //TodoList 조회
@@ -44,9 +43,8 @@ public class TODOController {
     @RequestMapping(value = "/list",method = RequestMethod.PATCH, consumes = "application/json")
     public ResponseEntity updateList(
             @RequestBody @ApiParam(value = "(required: id,TodoType,Todo)", required = true) @Valid TODOList todoList){
-        return todoService.UpdateList(todoList)
-                ? new ResponseEntity<>("OK", HttpStatus.OK)
-                : new ResponseEntity<>("Update Fail", HttpStatus.BAD_REQUEST);
+        todoService.UpdateList(todoList);
+        return new ResponseEntity<>("List is Updated", HttpStatus.OK);
     }
 
     //TodoList 삭제
@@ -54,9 +52,8 @@ public class TODOController {
     @ApiOperation(value = "Delete TODO List",tags = "TODO")
     @RequestMapping(value = "/list/{id}",method = RequestMethod.DELETE)
     public ResponseEntity deleteList(@PathVariable("id") Long id){
-        return todoService.DeleteList(id)
-                ? new ResponseEntity<>("OK", HttpStatus.OK)
-                : new ResponseEntity<>("Delete Failed",HttpStatus.BAD_REQUEST);
+        todoService.DeleteList(id);
+        return new ResponseEntity<>("List is deleted", HttpStatus.OK);
     }
 
     //TodoList -> Archieve
@@ -64,9 +61,8 @@ public class TODOController {
     @ApiOperation(value = "Achieve TODO List",tags = "TODO")
     @RequestMapping(value = "/archieve/{id}",method = RequestMethod.PATCH)
     public ResponseEntity achieveList(@PathVariable("id") Long id){
-        return todoService.AchieveList(id)
-                ? new ResponseEntity<>("OK", HttpStatus.OK)
-                : new ResponseEntity<>("Achieve Failed",HttpStatus.BAD_REQUEST);
+        todoService.AchieveList(id);
+        return new ResponseEntity<>("OK", HttpStatus.OK);
     }
 
     //Archieve 조회

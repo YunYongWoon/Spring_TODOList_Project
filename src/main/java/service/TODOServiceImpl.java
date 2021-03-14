@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repository.TODOMapper;
 import util.JwtUtil;
+import exception.DatabaseException;
 
 import java.util.List;
 
@@ -17,71 +18,70 @@ public class TODOServiceImpl implements TODOService {
 
     //TodoList 생성
     @Override
-    public boolean CreateList(TODOList todoList) {
+    public void CreateList(TODOList todoList) throws DatabaseException {
         todoList.setUser_ID(jwtUtil.getIdByToken());
 
-        if(todoList.getUser_ID() == null || todoList.getTodo() == null || todoList.getTodoType() == null) {
-            return false;
-        }
-        else {
+        if(todoList.getUser_ID() == null)
+            throw new DatabaseException("User id is NULL");
+        else if(todoList.getTodo() == null)
+            throw new DatabaseException("Todo is NULL");
+        else if(todoList.getTodoType() == null)
+            throw new DatabaseException("TodoType is NULL");
+        else
             todoMapper.Create(todoList);
-            return true;
-        }
     }
 
     //TodoList 조회
     @Override
     public List<TODOList> ReadList() {
         Long user_id = jwtUtil.getIdByToken();
-        if(user_id != null) {
+        if(user_id == null)
+            throw new DatabaseException("User id is NULL");
+
+        else
             // 일정 지난게 있으면 알림
             todoMapper.checkScheduleTrue(user_id);
             // 일정 변경 후 false로 변경
             todoMapper.checkScheduleFalse(user_id);
             return todoMapper.Read(user_id);
-        }
-        else
-            return null;
     }
 
     //TodoList 수정
     @Override
-    public boolean UpdateList(TODOList todoList) {
-        if(todoList.getId() == null || todoList.getTodo() == null || todoList.getTodoType() == null)
-            return false;
+    public void UpdateList(TODOList todoList) {
+        if(todoList.getId() == null)
+            throw new DatabaseException("List id is NULL");
+        else if(todoList.getTodo() == null)
+            throw new DatabaseException("Todo is NULL");
+        else if(todoList.getTodoType() == null)
+            throw new DatabaseException("TodoType is NULL");
         else{
             todoMapper.Update(todoList);
-            return true;
         }
     }
 
     //TodoList 삭제(Soft Delete)
     @Override
-    public boolean DeleteList(Long id) {
-        if(id != null) {
-            todoMapper.Delete(id);
-            return true;
-        }
+    public void DeleteList(Long id) {
+        if(id == null)
+            throw new DatabaseException("List id is NULL");
         else
-            return false;
+            todoMapper.Delete(id);
     }
 
     @Override
-    public boolean AchieveList(Long id) {
-        if(id != null) {
+    public void AchieveList(Long id) {
+        if(id != null)
+            throw new DatabaseException("List id is NULL");
+        else
             todoMapper.Achieve(id);
-            return true;
-        }
-        else{
-            return false;
-        }
     }
 
     @Override
     public List<TODOList> ReadArchieve() {
         Long user_id = jwtUtil.getIdByToken();
         if(user_id == null)
-            return null;
+            throw new DatabaseException("User id is NULL");
         else
             return todoMapper.readArchieve(user_id);
     }

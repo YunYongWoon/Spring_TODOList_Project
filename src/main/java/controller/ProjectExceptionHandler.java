@@ -7,12 +7,19 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import exception.BaseException;
+
 @ControllerAdvice
-public class ValidExceptionHandler {
+public class ProjectExceptionHandler {
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     @ResponseBody
     public ResponseEntity<String> ValidException(MethodArgumentNotValidException e){
         return new ResponseEntity<String>("Wrong Data Format", HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(value = BaseException.class)
+    @ResponseBody
+    public ResponseEntity<String> ValidException(BaseException e){
+        return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 }
