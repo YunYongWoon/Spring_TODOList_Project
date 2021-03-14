@@ -19,6 +19,10 @@
         UPDATE TODO_Lists SET is_deleted = 1 WHERE id = #{id}
     </update>
 
+    <select id="getTime">
+        SELECT scheduled_at FROM TODO_Lists WHERE id = {id};
+    </select>
+
     <update id="Achieve">
         UPDATE TODO_Lists SET is_achieved = 1 WHERE id = #{id};
     </update>

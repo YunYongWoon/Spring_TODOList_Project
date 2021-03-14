@@ -3,7 +3,6 @@ package interceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import util.JwtUtil;
-import exception.TokenException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,20 +14,22 @@ public class Interceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String token = request.getHeader("Authorization");
-
-        // 토큰이 없으면
-        if ( token == null || ("".equals(token) && token.isEmpty()) ) {
-            throw new TokenException("No Token");
+        if ( token == null || ("".equals(token) && token.isEmpty()) ) { // 토큰이 없는경우
+            System.out.println("No Token");
+            throw new Exception();
         }
-        if  (!token.startsWith("Bearer ")){ // 토큰이 Bearer 인증타입을 지키지않고 전송이 될때
-            throw new TokenException("Not Bearer");
+        if ( token.length() < 10 ){
+            System.out.println("To Short");
+            throw new Exception();
         }
-        else if(token.length() < 8){
-            throw new TokenException("Too short!");
+        else if  (!token.startsWith("Bearer ")){ // 토큰이 Bearer 인증타입을 지키지않고 전송이 될때
+            System.out.println("Not Bearer");
+            throw new Exception();
         }
         else {
-            if ( jwtUtil.checkToken(token) ) { //토큰의 인증 기간이 종료되었으면
-                throw new TokenException("is Expired");
+            if ( jwtUtil.checkToken(token) ) {
+                System.out.println("is Expired");
+                throw new Exception();
             }
             return true;
         }

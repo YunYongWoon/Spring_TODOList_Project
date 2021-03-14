@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 public interface UserMapper {
     void Register(User user);
     User Login(User user);
-    User CheckID(String accountID);
+    User Check_ID(String accountID);
 }
