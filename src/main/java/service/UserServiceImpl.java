@@ -17,14 +17,13 @@ public class UserServiceImpl implements UserService{
 
     //회원가입
     @Override
-    public boolean RegisterUser(User user) {
+    public void RegisterUser(User user) {
         if(CheckID(user) != null)
             throw new RuntimeException("ID is exist");
         else {
             String bcryptPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
             user.setPassword(bcryptPassword);
             userMapper.Register(user);
-            return true;
         }
     }
 

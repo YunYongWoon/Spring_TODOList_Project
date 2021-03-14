@@ -26,9 +26,8 @@ public class UserController {
     @ApiOperation(value = "Register Test",tags = "User")
     @RequestMapping(value = "/registration",method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity<String> userRegister(@ApiParam(value = "required : accountID, password", required = true) @RequestBody @Valid User user){
-        return userService.RegisterUser(user)
-                ? new ResponseEntity<>("OK", HttpStatus.OK)
-                : new ResponseEntity<>("Register Fail", HttpStatus.INTERNAL_SERVER_ERROR);
+        userService.RegisterUser(user);
+        return new ResponseEntity<>("OK", HttpStatus.OK);
     }
 
     @ResponseBody
