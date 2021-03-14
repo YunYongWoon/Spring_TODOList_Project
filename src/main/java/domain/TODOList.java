@@ -9,10 +9,10 @@ import java.util.Date;
 
 public class TODOList {
     Long id;
-    @NotNull(message = "TodoType is Null")
+    @NotNull(message = "TodoType이 선택되지 않았습니다.")
     TodoType todoType;
-    @Size(min=1,max=200)
-    @NotNull(message = "Todo is Null")
+    @Size(min=1,max=200, message = "Todo의 길이가 너무 깁니다.")
+    @NotNull(message = "Todo가 입력되지 않았습니다.")
     String todo;
     Long user_ID;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

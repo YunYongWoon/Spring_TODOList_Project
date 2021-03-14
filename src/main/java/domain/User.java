@@ -5,13 +5,13 @@ import java.sql.Timestamp;
 
 public class User {
     Long ID;
-    @Size(min=6,max=16)
-    @Pattern(regexp = "[a-zA-Z0-9]+")
-    @NotNull(message = "ID is not exist")
+    @Size(min=6,max=16, message = "6자~16자 길이만 가능합니다.")
+    @Pattern(regexp = "[a-zA-Z0-9]+",message = "영어 대소문자, 숫자만 가능합니다.")
+    @NotNull(message = "아이디가 입력되지 않았습니다.")
     String accountID;
-    @Size(min=6,max=16)
-    @Pattern(regexp = "[a-zA-Z0-9~!@#$%^&*()]+")
-    @NotNull(message = "Password is not exist")
+    @Size(min=6,max=16, message = "6자~16자 길이만 가능합니다.")
+    @Pattern(regexp = "[a-zA-Z0-9~!@#$%^&*()]+",message = "영어 대소문자, 숫자, ~!@#$%^&*() 특수문자만 가능합니다.")
+    @NotNull(message = "패스워드가 입력되지 않았습니다.")
     String password;
     Timestamp created_at;
     Timestamp updated_at;

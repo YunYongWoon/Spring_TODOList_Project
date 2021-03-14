@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public void RegisterUser(User user) {
         if(CheckID(user) != null)
-            throw new RuntimeException("ID is exist");
+            throw new RuntimeException("ID가 존재합니다.");
         else {
             String bcryptPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
             user.setPassword(bcryptPassword);
@@ -33,14 +33,14 @@ public class UserServiceImpl implements UserService{
         User loginUser = userMapper.Login(user);
         // 비밀번호가 같으면 성공
         if(loginUser == null)
-            throw new RuntimeException("User is not exist");
+            throw new RuntimeException("유저가 존재하지 않습니다.");
         else {
             if (BCrypt.checkpw(user.getPassword(), loginUser.getPassword())) {
                 String token = jwtUtil.generateToken(loginUser.getID());
                 return token;
             }
             else
-                throw new RuntimeException("Password is Wrong");
+                throw new RuntimeException("등록되지 않은 비밀번호입니다.");
         }
     }
 
