@@ -17,71 +17,71 @@ public class TODOServiceImpl implements TODOService {
 
     //TodoList 생성
     @Override
-    public boolean CreateList(TODOList todoList) {
+    public void CreateList(TODOList todoList) {
         todoList.setUser_ID(jwtUtil.getIdByToken());
 
-        if(todoList.getUser_ID() == null || todoList.getTodo() == null || todoList.getTodoType() == null) {
-            return false;
-        }
-        else {
+        if(todoList.getUser_ID() == null)
+            throw new RuntimeException("ID is not exist");
+        else if (todoList.getTodo() == null)
+            throw new RuntimeException("TODO String is null");
+        else if(todoList.getTodoType() == null)
+            throw new RuntimeException("TODO Type is not choose");
+        else
             todoMapper.Create(todoList);
-            return true;
-        }
+
     }
 
     //TodoList 조회
     @Override
     public List<TODOList> ReadList() {
         Long user_id = jwtUtil.getIdByToken();
-        if(user_id != null) {
+        if(user_id == null)
+            throw new RuntimeException("id is not exist");
+        else {
             // 일정 지난게 있으면 알림
             todoMapper.checkScheduleTrue(user_id);
             // 일정 변경 후 false로 변경
             todoMapper.checkScheduleFalse(user_id);
             return todoMapper.Read(user_id);
         }
-        else
-            return null;
     }
 
     //TodoList 수정
     @Override
-    public boolean UpdateList(TODOList todoList) {
-        if(todoList.getId() == null || todoList.getTodo() == null || todoList.getTodoType() == null)
-            return false;
+    public void UpdateList(TODOList todoList) {
+        if(todoList.getId() == null)
+            throw new RuntimeException("List ID is not exist");
+        else if (todoList.getTodo() == null)
+            throw new RuntimeException("TODO String is null");
+        else if(todoList.getTodoType() == null)
+            throw new RuntimeException("TODO Type is not choose");
         else{
             todoMapper.Update(todoList);
-            return true;
         }
     }
 
     //TodoList 삭제(Soft Delete)
     @Override
-    public boolean DeleteList(Long id) {
-        if(id != null) {
-            todoMapper.Delete(id);
-            return true;
-        }
+    public void DeleteList(Long id) {
+        if(id == null)
+            throw new RuntimeException("List ID is not exist");
         else
-            return false;
+            todoMapper.Delete(id);
     }
 
     @Override
-    public boolean AchieveList(Long id) {
-        if(id != null) {
+    public void AchieveList(Long id) {
+        if(id == null)
+            throw new RuntimeException("List ID is not exist");
+        else
             todoMapper.Achieve(id);
-            return true;
-        }
-        else{
-            return false;
-        }
     }
 
     @Override
     public List<TODOList> ReadArchieve() {
         Long user_id = jwtUtil.getIdByToken();
         if(user_id == null)
-            return null;
+            throw new RuntimeException("ID is not exist");
         else
             return todoMapper.readArchieve(user_id);
     }

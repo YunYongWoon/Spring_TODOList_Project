@@ -27,7 +27,7 @@ public class UserController {
     @RequestMapping(value = "/registration",method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity<String> userRegister(@ApiParam(value = "required : accountID, password", required = true) @RequestBody @Valid User user){
         userService.RegisterUser(user);
-        return new ResponseEntity<>("OK", HttpStatus.OK);
+        return new ResponseEntity<>("Register is Finished", HttpStatus.OK);
     }
 
     @ResponseBody
@@ -38,6 +38,6 @@ public class UserController {
         if(token != null)
             return new ResponseEntity<>(token, HttpStatus.OK);
         else
-            return new ResponseEntity<>("login Failed",HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Token is not Created",HttpStatus.BAD_REQUEST);
     }
 }

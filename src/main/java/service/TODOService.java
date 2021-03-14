@@ -6,10 +6,10 @@ import domain.User;
 import java.util.List;
 
 public interface TODOService {
-    boolean CreateList(TODOList todoList);
+    void CreateList(TODOList todoList);
     List<TODOList> ReadList();
-    boolean UpdateList(TODOList todoList);
-    boolean DeleteList(Long id);
-    boolean AchieveList(Long id);
+    void UpdateList(TODOList todoList);
+    void DeleteList(Long id);
+    void AchieveList(Long id);
     List<TODOList> ReadArchieve();
 }
