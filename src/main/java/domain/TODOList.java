@@ -2,14 +2,17 @@ package domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 import java.util.Date;
 
 public class TODOList {
     Long id;
+    @NotNull(message = "TodoType is Null")
     TodoType todoType;
     @Size(min=1,max=200)
+    @NotNull(message = "Todo is Null")
     String todo;
     Long user_ID;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

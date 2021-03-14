@@ -7,9 +7,11 @@ public class User {
     Long ID;
     @Size(min=6,max=16)
     @Pattern(regexp = "[a-zA-Z0-9]+")
+    @NotNull(message = "ID is not exist")
     String accountID;
     @Size(min=6,max=16)
     @Pattern(regexp = "[a-zA-Z0-9~!@#$%^&*()]+")
+    @NotNull(message = "Password is not exist")
     String password;
     Timestamp created_at;
     Timestamp updated_at;
