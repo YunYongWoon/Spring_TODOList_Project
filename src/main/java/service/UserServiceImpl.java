@@ -18,10 +18,14 @@ public class UserServiceImpl implements UserService{
     //회원가입
     @Override
     public boolean RegisterUser(User user) {
-        String bcryptPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
-        user.setPassword(bcryptPassword);
-        userMapper.Register(user);
-        return true;
+        if(CheckID(user) != null)
+            throw new RuntimeException("ID is exist");
+        else {
+            String bcryptPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+            user.setPassword(bcryptPassword);
+            userMapper.Register(user);
+            return true;
+        }
     }
 
     // 로그인
@@ -29,11 +33,19 @@ public class UserServiceImpl implements UserService{
     public String Login(User user) {
         User loginUser = userMapper.Login(user);
         // 비밀번호가 같으면 성공
-        if(BCrypt.checkpw(user.getPassword(),loginUser.getPassword())){
-            String token = jwtUtil.generateToken(loginUser.getID());
-            return token;
+        if(loginUser == null)
+            throw new RuntimeException("User is not exist");
+        else {
+            if (BCrypt.checkpw(user.getPassword(), loginUser.getPassword())) {
+                String token = jwtUtil.generateToken(loginUser.getID());
+                return token;
+            }
+            else
+                throw new RuntimeException("Password is Wrong");
         }
-        else
-            return null;
+    }
+
+    public User CheckID(User user){
+        return userMapper.CheckID(user.getAccountID());
     }
 }
