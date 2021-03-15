@@ -17,4 +17,5 @@ public interface TODOMapper {
     void checkScheduleFalse(Long id);
     void Achieve(Long id);
     List<TODOList> readArchieve(Long user_id);
+    TODOList checkList(Long id);
 }

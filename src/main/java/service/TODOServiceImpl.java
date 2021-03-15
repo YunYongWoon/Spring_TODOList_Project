@@ -39,7 +39,8 @@ public class TODOServiceImpl implements TODOService {
     //TodoList 수정
     @Override
     public void UpdateList(Long id, TODOList todoList) {
-        if(id == null)
+        TODOList listCheck = checkList(id);
+        if(id == null || listCheck == null)
             throw new RuntimeException("해당 리스트의 id 정보 존재하지 않습니다.");
         else if(todoList == null)
             throw new RuntimeException("리스트가 입력되지 않았습니다.");
@@ -74,4 +75,9 @@ public class TODOServiceImpl implements TODOService {
         else
             return todoMapper.readArchieve(user_id);
     }
+
+    public TODOList checkList(Long id){
+        return todoMapper.checkList(id);
+    }
+
 }
