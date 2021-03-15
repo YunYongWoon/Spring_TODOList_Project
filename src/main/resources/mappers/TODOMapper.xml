@@ -8,7 +8,7 @@
     </insert>
 
     <select id="Read" resultType="domain.TODOList">
-        SELECT*FROM TODO_Lists WHERE User_ID = #{user_ID} AND is_deleted = 0 AND is_achieved = 0
+        SELECT id,TodoType,Todo,scheduled_at,is_finished FROM TODO_Lists WHERE User_ID = #{user_ID} AND is_deleted = 0 AND is_achieved = 0
     </select>
 
     <update id="Update">
@@ -28,7 +28,7 @@
     </update>
 
     <select id="readArchieve" resultType="domain.TODOList">
-        SELECT*FROM TODO_Lists WHERE User_ID = #{user_ID} AND is_achieved = 1
+        SELECT id,TodoType,Todo,scheduled_at,is_finished FROM TODO_Lists WHERE User_ID = #{user_ID} AND is_achieved = 1
     </select>
 
     <update id="checkScheduleTrue">

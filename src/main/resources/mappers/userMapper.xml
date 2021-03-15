@@ -7,7 +7,7 @@
         INSERT INTO Users(AccountID,Password) VALUES(#{accountID}, #{password})
     </insert>
     <select id="Login" resultType="domain.User">
-        SELECT * FROM Users WHERE AccountID = #{accountID}
+        SELECT ID,accountID,Password FROM Users WHERE AccountID = #{accountID}
     </select>
     <select id="CheckAccountID" resultType="domain.User">
         SELECT accountID FROM Users WHERE AccountID = #{accountID}
