@@ -8,7 +8,7 @@ import java.util.List;
 public interface TODOService {
     void CreateList(TODOList todoList);
     List<TODOList> ReadList();
-    void UpdateList(TODOList todoList);
+    void UpdateList(Long id, TODOList todoList);
     void DeleteList(Long id);
     void AchieveList(Long id);
     List<TODOList> ReadArchieve();

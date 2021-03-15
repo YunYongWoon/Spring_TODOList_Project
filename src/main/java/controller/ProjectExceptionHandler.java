@@ -27,7 +27,7 @@ public class ProjectExceptionHandler {
     @ExceptionHandler(value = RuntimeException.class)
     @ResponseBody
     public ResponseEntity<String> GlobalException(RuntimeException e){
-        return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }

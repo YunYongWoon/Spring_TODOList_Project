@@ -40,10 +40,11 @@ public class TODOController {
     //TodoList 수정
     @ResponseBody
     @ApiOperation(value = "Update TODO List",tags = "TODO")
-    @RequestMapping(value = "/list",method = RequestMethod.PATCH, consumes = "application/json")
+    @RequestMapping(value = "/list/{id}",method = RequestMethod.PATCH, consumes = "application/json")
     public ResponseEntity updateList(
-            @RequestBody @ApiParam(value = "(required: id,TodoType,Todo)", required = true) @Valid TODOList todoList){
-        todoService.UpdateList(todoList);
+            @PathVariable("id") Long id,
+            @RequestBody @ApiParam(value = "(required: TodoType,Todo)", required = true) @Valid TODOList todoList){
+        todoService.UpdateList(id,todoList);
         return new ResponseEntity<>("List is Updated", HttpStatus.OK);
     }
 
