@@ -1,7 +1,7 @@
 package service;
 
+import domain.ArchieveList;
 import domain.TODOList;
-import domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repository.TODOMapper;
@@ -63,17 +63,25 @@ public class TODOServiceImpl implements TODOService {
     public void AchieveList(Long id) {
         if(id == null)
             throw new RuntimeException("해당 리스트 정보가 존재하지 않습니다.");
-        else
-            todoMapper.Achieve(id);
+        else {
+            TODOList list = new TODOList();
+            list = ReadArchieve(id);
+
+            ArchieveList archieveList = new ArchieveList();
+            archieveList.setTodo(list.getTodo());
+            archieveList.setTodoType(list.getTodoType());
+            archieveList.setUser_ID(list.getUser_ID());
+
+            // TODO : archieveList.setScheduled_at(list.getScheduled_at()); 처
+            todoMapper.Achieve(archieveList);
+        }
     }
 
-    @Override
-    public List<TODOList> ReadArchieve() {
-        Long user_id = jwtUtil.getIdByToken();
-        if(user_id == null)
-            throw new RuntimeException("해당 ID 정보가 존재하지 않습니다.");
+    public TODOList ReadArchieve(Long id) {
+        if(id == null)
+            throw new RuntimeException("해당 리스 정보가 존재하지 않습니다.");
         else
-            return todoMapper.readArchieve(user_id);
+            return todoMapper.readArchieve(id);
     }
 
     public TODOList checkList(Long id){

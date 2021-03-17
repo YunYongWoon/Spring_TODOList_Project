@@ -66,11 +66,11 @@ public class TODOController {
         return new ResponseEntity<>("List is Achieved", HttpStatus.OK);
     }
 
-    //Archieve 조회
-    @ResponseBody
-    @ApiOperation(value = "Read Archieve",tags = "TODO")
-    @RequestMapping(value = "/api/archieve",method = RequestMethod.GET)
-    public ResponseEntity readArchieve(){
-        return new ResponseEntity(todoService.ReadArchieve(),HttpStatus.OK);
-    }
+//    //Archieve 조회
+//    @ResponseBody
+//    @ApiOperation(value = "Read Archieve",tags = "TODO")
+//    @RequestMapping(value = "archieve/{id}",method = RequestMethod.GET)
+//    public ResponseEntity readArchieve(@PathVariable("id") Long id){
+//        return new ResponseEntity(todoService.ReadArchieve(id),HttpStatus.OK);
+//    }
 }

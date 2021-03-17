@@ -1,5 +1,6 @@
 package repository;
 
+import domain.ArchieveList;
 import domain.TODOList;
 import domain.User;
 import org.springframework.stereotype.Repository;
@@ -13,9 +14,10 @@ public interface TODOMapper {
     List<TODOList> Read(Long user_id);
     void Update(TODOList todoList);
     void Delete(Long id);
+    void Achieve(ArchieveList archieveList);
+
     void checkScheduleTrue(Long id);
     void checkScheduleFalse(Long id);
-    void Achieve(Long id);
-    List<TODOList> readArchieve(Long user_id);
+    TODOList readArchieve(Long user_id);
     TODOList checkList(Long id);
 }

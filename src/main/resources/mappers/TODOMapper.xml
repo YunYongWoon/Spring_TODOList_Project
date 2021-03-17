@@ -24,19 +24,10 @@
         UPDATE TODO_Lists SET is_deleted = 1 WHERE id = #{id};
     </update>
 
-    <select id="getTime">
-        SELECT scheduled_at FROM TODO_Lists WHERE id = {id};
-    </select>
-
     <update id="Achieve">
-        UPDATE TODO_Lists SET is_achieved = 1 WHERE id = #{id};
+        INSERT INTO Archieve_Lists(TodoType,Todo,User_ID)
+        VALUES(#{todoType},#{todo},#{user_ID});
     </update>
-
-    <select id="readArchieve" resultType="domain.TODOList">
-        SELECT id,TodoType,Todo,scheduled_at,is_finished
-        FROM TODO_Lists
-        WHERE User_ID = #{user_ID} AND is_achieved = 1;
-    </select>
 
     <update id="checkScheduleTrue">
         UPDATE TODO_Lists SET is_finished = 1
@@ -48,6 +39,12 @@
         WHERE user_id = #{user_id} AND scheduled_at > now() AND is_deleted = 0 AND is_achieved = 0
         OR user_id = #{user_id} AND scheduled_at IS NULL AND is_deleted = 0 AND is_achieved = 0;
     </update>
+
+    <select id="readArchieve" resultType="domain.TODOList">
+        SELECT TodoType,Todo,scheduled_at,user_ID
+        FROM TODO_Lists
+        WHERE ID = #{id}
+    </select>
 
     <select id="checkList" resultType="domain.TODOList">
         SELECT id FROM TODO_Lists WHERE ID = #{id}
