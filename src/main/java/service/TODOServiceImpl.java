@@ -64,15 +64,14 @@ public class TODOServiceImpl implements TODOService {
         if(id == null)
             throw new RuntimeException("해당 리스트 정보가 존재하지 않습니다.");
         else {
-            TODOList list = new TODOList();
-            list = ReadArchieve(id);
+            TODOList list = ReadArchieve(id);
 
             ArchieveList archieveList = new ArchieveList();
             archieveList.setTodo(list.getTodo());
             archieveList.setTodoType(list.getTodoType());
             archieveList.setUser_ID(list.getUser_ID());
 
-            // TODO : archieveList.setScheduled_at(list.getScheduled_at()); 처
+            // TODO : archieveList.setScheduled_at(list.getScheduled_at()); 처리
             todoMapper.Achieve(archieveList);
             todoMapper.deleteArchieve(id);
         }

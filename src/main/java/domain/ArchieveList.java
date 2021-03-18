@@ -10,9 +10,9 @@ public class ArchieveList {
     Long id;
     @NotNull(message = "TodoType이 선택되지 않았습니다.")
     TODOList.TodoType todoType;
-    @Size(min=1,max=200, message = "Todo의 길이가 너무 깁니다.")
     @NotNull(message = "Todo가 입력되지 않았습니다.")
     String todo;
+    @NotNull(message = "user_ID가 입력되지 않았습니다.")
     Long user_ID;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     Timestamp scheduled_at;

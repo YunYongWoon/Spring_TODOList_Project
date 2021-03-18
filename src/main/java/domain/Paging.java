@@ -1,9 +1,14 @@
 package domain;
 
 
+import javax.validation.constraints.NotNull;
+
 public class Paging {
+    @NotNull(message = "userID가 입력되지 않았습니다")
     Long user_ID;
+    @NotNull(message = "pageStart가 입력되지 않았습니다")
     int pageStart;
+    @NotNull(message = "listCnt가 입력되지 않았습니다")
     int listCnt;
 
     public Long getUser_ID() {
