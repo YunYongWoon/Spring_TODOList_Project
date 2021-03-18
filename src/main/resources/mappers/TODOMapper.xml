@@ -29,6 +29,10 @@
         VALUES(#{todoType},#{todo},#{user_ID});
     </update>
 
+    <update id="deleteArchieve">
+        UPDATE TODO_Lists SET is_achieved = 1 WHERE id = #{id};
+    </update>
+
     <update id="checkScheduleTrue">
         UPDATE TODO_Lists SET is_finished = 1
         WHERE user_id = #{user_id} AND scheduled_at &lt; now() AND is_deleted = 0 AND is_achieved = 0;

@@ -74,6 +74,7 @@ public class TODOServiceImpl implements TODOService {
 
             // TODO : archieveList.setScheduled_at(list.getScheduled_at()); 처
             todoMapper.Achieve(archieveList);
+            todoMapper.deleteArchieve(id);
         }
     }
 
