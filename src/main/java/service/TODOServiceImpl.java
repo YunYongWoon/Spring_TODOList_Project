@@ -4,6 +4,7 @@ import domain.ArchieveList;
 import domain.TODOList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import repository.TODOMapper;
 import util.JwtUtil;
 
@@ -26,6 +27,7 @@ public class TODOServiceImpl implements TODOService {
     }
 
     //TodoList 조회
+    @Transactional
     @Override
     public List<TODOList> ReadList() {
         Long user_id = jwtUtil.getIdByToken();
@@ -60,6 +62,7 @@ public class TODOServiceImpl implements TODOService {
     }
 
     @Override
+    @Transactional
     public void AchieveList(Long id) {
         if(id == null)
             throw new RuntimeException("해당 리스트 정보가 존재하지 않습니다.");

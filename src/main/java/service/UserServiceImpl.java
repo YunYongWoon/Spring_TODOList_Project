@@ -4,6 +4,7 @@ import domain.User;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import repository.UserMapper;
 import util.JwtUtil;
 
@@ -29,6 +30,7 @@ public class UserServiceImpl implements UserService{
 
     // 로그인
     @Override
+    @Transactional
     public String Login(User user) {
         User loginUser = userMapper.Login(user);
         // 유저 정보 체크

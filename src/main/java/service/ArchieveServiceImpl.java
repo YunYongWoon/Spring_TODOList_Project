@@ -4,6 +4,7 @@ import domain.ArchieveList;
 import domain.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import repository.ArchieveMapper;
 import util.JwtUtil;
 import util.PagingUtil;
@@ -14,14 +15,13 @@ import java.util.List;
 public class ArchieveServiceImpl implements ArchieveService{
     @Autowired
     ArchieveMapper archieveMapper;
-
     @Autowired
     PagingUtil pagingUtil;
-
     @Autowired
     JwtUtil jwtUtil;
 
     @Override
+    @Transactional
     public List<ArchieveList> ReadList(int currentPage) {
         Long user_id = jwtUtil.getIdByToken();
         pagingUtil.setTotalListCnt(getTotalCnt(user_id));
