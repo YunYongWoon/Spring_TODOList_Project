@@ -8,7 +8,7 @@ public class PagingUtil {
     private int totalPageCnt;
     private int lastPageListCnt;
     private int totalListInPage = 10;
-    private int startList;
+    private Long startList;
 
     public int getTotalListCnt() {
         return totalListCnt;
@@ -44,12 +44,12 @@ public class PagingUtil {
         this.totalListInPage = totalListInPage;
     }
 
-    public int getStartList() {
+    public Long getStartList() {
         return startList;
     }
 
-    public void setStartList(int startList) {
-        int start = (startList * getTotalListInPage()) - getTotalListInPage();
+    public void setStartList(Long startList) {
+        Long start = (startList * getTotalListInPage()) - getTotalListInPage();
         this.startList = start;
     }
 }

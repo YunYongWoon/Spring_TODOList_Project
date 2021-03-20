@@ -7,7 +7,7 @@ public class Paging {
     @NotNull(message = "userID가 입력되지 않았습니다")
     Long user_ID;
     @NotNull(message = "pageStart가 입력되지 않았습니다")
-    int pageStart;
+    Long pageStart;
     @NotNull(message = "listCnt가 입력되지 않았습니다")
     int listCnt;
 
@@ -19,11 +19,11 @@ public class Paging {
         this.user_ID = user_ID;
     }
 
-    public int getPageStart() {
+    public Long getPageStart() {
         return pageStart;
     }
 
-    public void setPageStart(int pageStart) {
+    public void setPageStart(Long pageStart) {
         this.pageStart = pageStart;
     }
 

@@ -21,11 +21,10 @@ public class UserServiceImpl implements UserService{
     public void RegisterUser(User user) {
         if(CheckAccountID(user) != null)
             throw new RuntimeException("ID가 존재합니다.");
-        else {
-            String bcryptPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
-            user.setPassword(bcryptPassword);
-            userMapper.Register(user);
-        }
+
+        String bcryptPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+        user.setPassword(bcryptPassword);
+        userMapper.Register(user);
     }
 
     // 로그인
@@ -36,14 +35,12 @@ public class UserServiceImpl implements UserService{
         // 유저 정보 체크
         if(loginUser == null)
             throw new RuntimeException("유저가 존재하지 않습니다.");
-        else {  // 비밀번호가 같으면 성공
-            if (BCrypt.checkpw(user.getPassword(), loginUser.getPassword())) {
-                String token = jwtUtil.generateToken(loginUser.getID());
-                return token;
-            }
-            else
-                throw new RuntimeException("등록되지 않은 비밀번호입니다.");
-        }
+        // 비밀번호가 같으면 성공
+        if (!BCrypt.checkpw(user.getPassword(), loginUser.getPassword()))
+            throw new RuntimeException("등록되지 않은 비밀번호입니다.");
+
+        String token = jwtUtil.generateToken(loginUser.getID());
+        return token;
     }
 
     public User CheckAccountID(User user){

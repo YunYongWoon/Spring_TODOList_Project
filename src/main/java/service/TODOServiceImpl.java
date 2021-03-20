@@ -20,9 +20,10 @@ public class TODOServiceImpl implements TODOService {
     //TodoList 생성
     @Override
     public void CreateList(TODOList todoList) {
-        todoList.setUser_ID(jwtUtil.getIdByToken());
         if(todoList == null)
             throw new RuntimeException("리스트가 존재하지 않습니다!");
+
+        todoList.setUser_ID(jwtUtil.getIdByToken());
         todoMapper.Create(todoList);
     }
 
@@ -41,53 +42,57 @@ public class TODOServiceImpl implements TODOService {
     //TodoList 수정
     @Override
     public void UpdateList(Long id, TODOList todoList) {
-        TODOList listCheck = checkList(id);
-        if(id == null || listCheck == null)
-            throw new RuntimeException("해당 리스트의 id 정보 존재하지 않습니다.");
-        else if(todoList == null)
+        if(id == null)
+            throw new RuntimeException("id 정보가 입력되지 않았습니다.");
+
+        if(todoList == null)
             throw new RuntimeException("리스트가 입력되지 않았습니다.");
-        else{
-            todoList.setId(id);
-            todoMapper.Update(todoList);
-        }
+
+        TODOList listCheck = checkList(id);
+
+        if(listCheck == null)
+            throw new RuntimeException("해당 리스트의 id 정보 존재하지 않습니다.");
+
+        todoList.setId(id);
+        todoMapper.Update(todoList);
     }
 
     //TodoList 삭제(Soft Delete)
     @Override
     public void DeleteList(Long id) {
        if(id == null)
-           throw new RuntimeException("해당 리스트 정보가 존재하지 않습니다.");
-       else
-           todoMapper.Delete(id);
+           throw new RuntimeException("id 정보가 입력되지 않았습니다.");
+
+       todoMapper.Delete(id);
     }
 
     @Override
     @Transactional
     public void AchieveList(Long id) {
         if(id == null)
-            throw new RuntimeException("해당 리스트 정보가 존재하지 않습니다.");
-        else {
-            TODOList list = ReadArchieve(id);
+            throw new RuntimeException("id 정보가 입력되지 않았습니다.");
 
-            ArchieveList archieveList = new ArchieveList();
-            archieveList.setTodo(list.getTodo());
-            archieveList.setTodoType(list.getTodoType());
-            archieveList.setUser_ID(list.getUser_ID());
+        TODOList list = ReadArchieve(id);
 
-            // TODO : archieveList.setScheduled_at(list.getScheduled_at()); 처리
-            todoMapper.Achieve(archieveList);
-            todoMapper.deleteArchieve(id);
-        }
+        ArchieveList archieveList = new ArchieveList();
+        archieveList.setTodo(list.getTodo());
+        archieveList.setTodoType(list.getTodoType());
+        archieveList.setUser_ID(list.getUser_ID());
+
+        // TODO : archieveList.setScheduled_at(list.getScheduled_at()); 처리
+        todoMapper.Achieve(archieveList);
+        todoMapper.deleteArchieve(id);
     }
 
     public TODOList ReadArchieve(Long id) {
         if(id == null)
-            throw new RuntimeException("해당 리스 정보가 존재하지 않습니다.");
-        else
-            return todoMapper.readArchieve(id);
+            throw new RuntimeException("id 정보가 입력되지 않았습니다.");
+        return todoMapper.readArchieve(id);
     }
 
     public TODOList checkList(Long id){
+        if(id == null)
+            throw new RuntimeException("id 정보가 입력되지 않았습니다.");
         return todoMapper.checkList(id);
     }
 

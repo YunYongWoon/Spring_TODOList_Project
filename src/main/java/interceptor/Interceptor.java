@@ -14,20 +14,23 @@ public class Interceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String token = request.getHeader("Authorization");
-        if ( token == null || ("".equals(token) && token.isEmpty()) ) { // 토큰이 없는경우
+
+        if(token == null)  // 토큰이 없는경우
             throw new RuntimeException("No Token");
-        }
-        if ( token.length() < 10 ){
+
+        if(token.length() < 10 ) // 토큰 길이가 짧을 경우
             throw new RuntimeException("To Short");
-        }
-        else if  (!token.startsWith("Bearer ")){ // 토큰이 Bearer 인증타입을 지키지않고 전송이 될때
+
+        if(!token.startsWith("Bearer ")) // 토큰이 Bearer 인증타입을 지키지않고 전송이 될때
             throw new RuntimeException("Not Bearer");
-        }
-        else {
-            if ( jwtUtil.checkToken(token) ) {
-                throw new RuntimeException("is Expired");
-            }
-            return true;
-        }
+
+        if(jwtUtil.getIdByToken() == null) // 토큰에 ID 정보가 없을 경우
+            throw new RuntimeException("No ID Data");
+
+        if ( jwtUtil.checkToken(token) )  // 토큰 인증 기간이 만료되었을 경우
+            throw new RuntimeException("is Expired");
+
+        return true;
     }
 }
+
