@@ -1,21 +1,20 @@
 package service;
 
-import domain.ArchieveList;
+import domain.ArchiveList;
 import domain.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import repository.ArchieveMapper;
-import sun.jvm.hotspot.utilities.IntArray;
+import repository.ArchiveMapper;
 import util.JwtUtil;
 import util.PagingUtil;
 
 import java.util.List;
 
 @Service
-public class ArchieveServiceImpl implements ArchieveService{
+public class ArchiveServiceImpl implements ArchiveService {
     @Autowired
-    ArchieveMapper archieveMapper;
+    ArchiveMapper archiveMapper;
     @Autowired
     PagingUtil pagingUtil;
     @Autowired
@@ -23,7 +22,7 @@ public class ArchieveServiceImpl implements ArchieveService{
 
     @Override
     @Transactional
-    public List<ArchieveList> ReadList(Long currentPage) {
+    public List<ArchiveList> ReadList(Long currentPage) {
         Long user_id = jwtUtil.getIdByToken();
         if(currentPage == null)
             throw new RuntimeException("currentPage 값이 없습니다");
@@ -45,11 +44,11 @@ public class ArchieveServiceImpl implements ArchieveService{
         paging.setPageStart(pageStart);
         paging.setListCnt(listCnt);
 
-        return archieveMapper.Read(paging);
+        return archiveMapper.Read(paging);
     }
 
     public int getTotalCnt(Long user_id){
-        return archieveMapper.getCount(user_id);
+        return archiveMapper.getCount(user_id);
     }
 
 }

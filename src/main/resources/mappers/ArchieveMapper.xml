@@ -2,10 +2,10 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="repository.ArchieveMapper">
-    <select id="Read" resultType="domain.ArchieveList">
+<mapper namespace="repository.ArchiveMapper">
+    <select id="Read" resultType="domain.ArchiveList">
         SELECT id,TodoType,Todo,scheduled_at
-        FROM Archieve_Lists
+        FROM Archive_Lists
         WHERE User_ID = #{user_ID}
         ORDER BY id DESC
         LIMIT #{pageStart},#{listCnt}
@@ -13,7 +13,7 @@
 
     <select id="getCount" resultType="int">
         SELECT count(id)
-        FROM Archieve_Lists
+        FROM Archive_Lists
         WHERE User_id = #{user_id};
     </select>
 

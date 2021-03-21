@@ -1,26 +1,26 @@
 package controller;
 
-import domain.ArchieveList;
+import domain.ArchiveList;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import service.ArchieveService;
+import service.ArchiveService;
 
 import java.util.List;
 
 @Controller
-public class ArchieveController {
+public class ArchiveController {
     @Autowired
-    ArchieveService archieveService;
+    ArchiveService archiveService;
     //TodoList 조회
     @ResponseBody
-    @ApiOperation(value = "Read Archieve List",tags = "Archieve")
-    @RequestMapping(value = "/api/Archieve/{page}",method = RequestMethod.GET)
-    public ResponseEntity<List<ArchieveList>> readList(
+    @ApiOperation(value = "Read Archive List",tags = "Archive")
+    @RequestMapping(value = "/api/Archive/{page}",method = RequestMethod.GET)
+    public ResponseEntity<List<ArchiveList>> readList(
             @PathVariable("page") Long page){
-        return new ResponseEntity(archieveService.ReadList(page), HttpStatus.OK);
+        return new ResponseEntity(archiveService.ReadList(page), HttpStatus.OK);
     }
 }

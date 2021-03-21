@@ -10,5 +10,5 @@ public interface TODOService {
     List<TODOList> ReadList();
     void UpdateList(Long id, TODOList todoList);
     void DeleteList(Long id);
-    void AchieveList(Long id);
+    void ArchiveList(Long id);
 }

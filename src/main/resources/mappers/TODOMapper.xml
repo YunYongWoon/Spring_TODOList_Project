@@ -11,7 +11,7 @@
     <select id="Read" resultType="domain.TODOList">
         SELECT id,TodoType,Todo,scheduled_at,is_finished
         FROM TODO_Lists
-        WHERE User_ID = #{user_ID} AND is_deleted = 0 AND is_achieved = 0;
+        WHERE User_ID = #{user_ID} AND is_deleted = 0 AND is_archived = 0;
     </select>
 
     <update id="Update">
@@ -24,27 +24,27 @@
         UPDATE TODO_Lists SET is_deleted = 1 WHERE id = #{id};
     </update>
 
-    <update id="Achieve">
-        INSERT INTO Archieve_Lists(TodoType,Todo,User_ID)
+    <update id="Archive">
+        INSERT INTO Archive_Lists(TodoType,Todo,User_ID)
         VALUES(#{todoType},#{todo},#{user_ID});
     </update>
 
-    <update id="deleteArchieve">
-        UPDATE TODO_Lists SET is_achieved = 1 WHERE id = #{id};
+    <update id="deleteArchive">
+        UPDATE TODO_Lists SET is_archived = 1 WHERE id = #{id};
     </update>
 
     <update id="checkScheduleTrue">
         UPDATE TODO_Lists SET is_finished = 1
-        WHERE user_id = #{user_id} AND scheduled_at &lt; now() AND is_deleted = 0 AND is_achieved = 0;
+        WHERE user_id = #{user_id} AND scheduled_at &lt; now() AND is_deleted = 0 AND is_archived = 0;
     </update>
 
     <update id="checkScheduleFalse">
         UPDATE TODO_Lists SET is_finished = 0
-        WHERE user_id = #{user_id} AND scheduled_at > now() AND is_deleted = 0 AND is_achieved = 0
-        OR user_id = #{user_id} AND scheduled_at IS NULL AND is_deleted = 0 AND is_achieved = 0;
+        WHERE user_id = #{user_id} AND scheduled_at > now() AND is_deleted = 0 AND is_archived = 0
+        OR user_id = #{user_id} AND scheduled_at IS NULL AND is_deleted = 0 AND is_archived = 0;
     </update>
 
-    <select id="readArchieve" resultType="domain.TODOList">
+    <select id="readArchive" resultType="domain.TODOList">
         SELECT TodoType,Todo,scheduled_at,user_ID
         FROM TODO_Lists
         WHERE ID = #{id}

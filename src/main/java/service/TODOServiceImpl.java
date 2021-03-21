@@ -1,6 +1,6 @@
 package service;
 
-import domain.ArchieveList;
+import domain.ArchiveList;
 import domain.TODOList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -68,26 +68,26 @@ public class TODOServiceImpl implements TODOService {
 
     @Override
     @Transactional
-    public void AchieveList(Long id) {
+    public void ArchiveList(Long id) {
         if(id == null)
             throw new RuntimeException("id 정보가 입력되지 않았습니다.");
 
-        TODOList list = ReadArchieve(id);
+        TODOList list = ReadArchive(id);
 
-        ArchieveList archieveList = new ArchieveList();
-        archieveList.setTodo(list.getTodo());
-        archieveList.setTodoType(list.getTodoType());
-        archieveList.setUser_ID(list.getUser_ID());
+        ArchiveList archiveList = new ArchiveList();
+        archiveList.setTodo(list.getTodo());
+        archiveList.setTodoType(list.getTodoType());
+        archiveList.setUser_ID(list.getUser_ID());
 
-        // TODO : archieveList.setScheduled_at(list.getScheduled_at()); 처리
-        todoMapper.Achieve(archieveList);
-        todoMapper.deleteArchieve(id);
+        // TODO : archiveList.setScheduled_at(list.getScheduled_at()); 처리
+        todoMapper.Archive(archiveList);
+        todoMapper.deleteArchive(id);
     }
 
-    public TODOList ReadArchieve(Long id) {
+    public TODOList ReadArchive(Long id) {
         if(id == null)
             throw new RuntimeException("id 정보가 입력되지 않았습니다.");
-        return todoMapper.readArchieve(id);
+        return todoMapper.readArchive(id);
     }
 
     public TODOList checkList(Long id){

@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import service.TODOService;
-import sun.security.krb5.internal.crypto.RsaMd5CksumType;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -57,12 +56,12 @@ public class TODOController {
         return new ResponseEntity<>("List is Deleted", HttpStatus.OK);
     }
 
-    //TodoList -> Archieve
+    //TodoList -> ArchiveList
     @ResponseBody
     @ApiOperation(value = "Achieve TODO List",tags = "TODO")
-    @RequestMapping(value = "/archieve/{id}",method = RequestMethod.PATCH)
+    @RequestMapping(value = "/archive/{id}",method = RequestMethod.PATCH)
     public ResponseEntity achieveList(@PathVariable("id") Long id){
-        todoService.AchieveList(id);
-        return new ResponseEntity<>("List is Achieved", HttpStatus.OK);
+        todoService.ArchiveList(id);
+        return new ResponseEntity<>("List is Archived", HttpStatus.OK);
     }
 }

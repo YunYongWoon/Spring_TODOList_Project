@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 
-public class ArchieveList {
+public class ArchiveList {
     Long id;
     @NotNull(message = "TodoType이 선택되지 않았습니다.")
     TODOList.TodoType todoType;
