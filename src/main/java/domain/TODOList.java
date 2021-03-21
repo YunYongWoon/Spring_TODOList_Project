@@ -57,7 +57,7 @@ public class TODOList {
         this.user_ID = user_ID;
     }
 
-    public Date getScheduled_at() {
+    public Timestamp getScheduled_at() {
         return scheduled_at;
     }
 
