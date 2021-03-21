@@ -32,8 +32,6 @@ public class ArchiveServiceImpl implements ArchiveService {
         int listCnt;
         if(currentPage < 1 || currentPage > pagingUtil.getTotalPageCnt())
             throw new RuntimeException("잘못된 페이지 정보입니다.");
-        else if(currentPage == pagingUtil.getTotalPageCnt())
-            listCnt = pagingUtil.getLastPageListCnt();
         else
             listCnt = pagingUtil.getTotalListInPage();
 

@@ -6,8 +6,7 @@ import org.springframework.stereotype.Component;
 public class PagingUtil {
     private int totalListCnt;
     private int totalPageCnt;
-    private int lastPageListCnt;
-    private int totalListInPage = 10;
+    private int totalListInPage = 5;
     private Long startList;
 
     public int getTotalListCnt() {
@@ -24,16 +23,7 @@ public class PagingUtil {
     }
 
     public void setTotalPageCnt(int totalPageCnt) {
-        setLastPageListCnt(totalPageCnt % totalListInPage);
         this.totalPageCnt = totalPageCnt / totalListInPage + 1;
-    }
-
-    public int getLastPageListCnt() {
-        return lastPageListCnt;
-    }
-
-    public void setLastPageListCnt(int lastPageListCnt) {
-        this.lastPageListCnt = lastPageListCnt;
     }
 
     public int getTotalListInPage() {
