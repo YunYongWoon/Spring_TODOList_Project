@@ -47,7 +47,7 @@ public class TODOServiceImpl implements TODOService {
             throw new RuntimeException("리스트가 입력되지 않았습니다.");
 
         if(checkList(id) == null)
-            throw new RuntimeException("해당 리스트의 id 정보 존재하지 않습니다.");
+            throw new RuntimeException("해당 id 정보가 존재하지 않습니다.");
 
         todoList.setId(id);
         todoMapper.Update(todoList);
