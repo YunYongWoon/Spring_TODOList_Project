@@ -8,7 +8,7 @@
         FROM Archive_Lists
         WHERE User_ID = #{user_ID}
         ORDER BY id DESC
-        LIMIT #{pageStart},#{listCnt}
+        LIMIT #{pageStart},#{totalListInPage}
     </select>
 
     <select id="getCount" resultType="int">
