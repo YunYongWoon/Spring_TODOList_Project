@@ -36,6 +36,8 @@ public class ArchiveServiceImpl implements ArchiveService {
     }
 
     public int getTotalCnt(Long user_id){
+        if(user_id == null)
+            throw new RuntimeException("user_id 정보가 입력되지 않았습니다");
         return archiveMapper.getCount(user_id);
     }
 
