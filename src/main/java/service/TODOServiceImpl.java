@@ -5,6 +5,7 @@ import domain.TODOList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repository.TODOMapper;
+import util.DateUtil;
 import util.JwtUtil;
 
 import java.util.List;
@@ -15,6 +16,8 @@ public class TODOServiceImpl implements TODOService {
     private TODOMapper todoMapper;
     @Autowired
     private JwtUtil jwtUtil;
+    @Autowired
+    private DateUtil dateUtil;
 
     //TodoList 생성
     @Override
@@ -78,8 +81,9 @@ public class TODOServiceImpl implements TODOService {
         archiveList.setTodo(list.getTodo());
         archiveList.setTodoType(list.getTodoType());
         archiveList.setUser_ID(list.getUser_ID());
+        if(list.getScheduled_at() != null)
+            archiveList.setScheduled_at(dateUtil.DateToTimestamp(list.getScheduled_at()));
 
-        // TODO : archiveList.setScheduled_at(list.getScheduled_at()); 처리
         todoMapper.Archive(archiveList);
         todoMapper.deleteArchive(id);
     }
