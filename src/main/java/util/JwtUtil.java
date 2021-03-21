@@ -32,7 +32,8 @@ public class JwtUtil {
         header.put("typ", "JWT");
         header.put("alg", "HS256");
 
-        Long expTime = 1000*60L*60L*1L;
+        //1시간
+        Long expTime = 1000*60L*60L;
         Date exp = new Date();
         exp.setTime(exp.getTime() + expTime);
 
