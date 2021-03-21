@@ -19,5 +19,7 @@ public interface TODOMapper {
     TODOList readArchive(Long user_id);
     void deleteArchive(Long id);
     TODOList checkList(Long id);
+
+    TODOList checkListDeleted(Long id);
 }
 

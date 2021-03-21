@@ -53,4 +53,8 @@
     <select id="checkList" resultType="domain.TODOList">
         SELECT id FROM TODO_Lists WHERE ID = #{id}
     </select>
+
+    <select id="checkListDeleted" resultType="domain.TODOList">
+        SELECT is_deleted,is_archived FROM TODO_Lists WHERE ID = #{id}
+    </select>
 </mapper>

@@ -29,7 +29,6 @@ public class UserServiceImpl implements UserService{
 
     // 로그인
     @Override
-    @Transactional
     public String Login(User user) {
         User loginUser = userMapper.Login(user);
         // 유저 정보 체크

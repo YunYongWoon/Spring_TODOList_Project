@@ -4,7 +4,6 @@ import domain.ArchiveList;
 import domain.TODOList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import repository.TODOMapper;
 import util.JwtUtil;
 
@@ -28,7 +27,6 @@ public class TODOServiceImpl implements TODOService {
     }
 
     //TodoList 조회
-    @Transactional
     @Override
     public List<TODOList> ReadList() {
         Long user_id = jwtUtil.getIdByToken();
@@ -67,10 +65,12 @@ public class TODOServiceImpl implements TODOService {
     }
 
     @Override
-    @Transactional
     public void ArchiveList(Long id) {
         if(id == null)
             throw new RuntimeException("id 정보가 입력되지 않았습니다.");
+
+        if(checkListDeleted(id))
+            throw new RuntimeException("삭제되거나 아카이브된 리스트는 아카이브가 불가능합니다.");
 
         TODOList list = ReadArchive(id);
 
@@ -96,4 +96,14 @@ public class TODOServiceImpl implements TODOService {
         return todoMapper.checkList(id);
     }
 
+    public boolean checkListDeleted(Long id) {
+        if (id == null)
+            throw new RuntimeException("id 정보가 입력되지 않았습니다.");
+        TODOList checkList = todoMapper.checkListDeleted(id);
+
+        if (checkList.isIs_deleted() || checkList.isIs_archived())
+            return true;
+        else
+            return false;
+    }
 }

@@ -4,7 +4,6 @@ import domain.ArchiveList;
 import domain.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import repository.ArchiveMapper;
 import util.JwtUtil;
 import util.PagingUtil;
@@ -21,7 +20,6 @@ public class ArchiveServiceImpl implements ArchiveService {
     JwtUtil jwtUtil;
 
     @Override
-    @Transactional
     public List<ArchiveList> ReadList(Long currentPage) {
         Long user_id = jwtUtil.getIdByToken();
         if(currentPage == null)
