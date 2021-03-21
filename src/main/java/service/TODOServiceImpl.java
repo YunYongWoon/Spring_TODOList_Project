@@ -102,6 +102,7 @@ public class TODOServiceImpl implements TODOService {
             throw new RuntimeException("id 정보가 입력되지 않았습니다.");
 
         TODOList checkList = todoMapper.checkListDeleted(id);
+
         if (checkList.isIs_deleted() || checkList.isIs_archived())
             return true;
         else

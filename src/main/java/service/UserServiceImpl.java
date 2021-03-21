@@ -19,6 +19,9 @@ public class UserServiceImpl implements UserService{
     //회원가입
     @Override
     public void RegisterUser(User user) {
+        if(user == null)
+            throw new RuntimeException("유저 데이터가 없습니다.");
+
         if(CheckAccountID(user) != null)
             throw new RuntimeException("ID가 존재합니다.");
 
@@ -30,6 +33,9 @@ public class UserServiceImpl implements UserService{
     // 로그인
     @Override
     public String Login(User user) {
+        if(user == null)
+            throw new RuntimeException("유저 데이터가 없습니다.");
+
         User loginUser = userMapper.Login(user);
         // 유저 정보 체크
         if(loginUser == null)
