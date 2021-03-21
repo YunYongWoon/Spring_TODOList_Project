@@ -49,9 +49,7 @@ public class TODOServiceImpl implements TODOService {
         if(todoList == null)
             throw new RuntimeException("리스트가 입력되지 않았습니다.");
 
-        TODOList listCheck = checkList(id);
-
-        if(listCheck == null)
+        if(checkList(id) == null)
             throw new RuntimeException("해당 리스트의 id 정보 존재하지 않습니다.");
 
         todoList.setId(id);
@@ -91,20 +89,22 @@ public class TODOServiceImpl implements TODOService {
     public TODOList ReadArchive(Long id) {
         if(id == null)
             throw new RuntimeException("id 정보가 입력되지 않았습니다.");
+
         return todoMapper.readArchive(id);
     }
 
     public TODOList checkList(Long id){
         if(id == null)
             throw new RuntimeException("id 정보가 입력되지 않았습니다.");
+
         return todoMapper.checkList(id);
     }
 
     public boolean checkListDeleted(Long id) {
         if (id == null)
             throw new RuntimeException("id 정보가 입력되지 않았습니다.");
-        TODOList checkList = todoMapper.checkListDeleted(id);
 
+        TODOList checkList = todoMapper.checkListDeleted(id);
         if (checkList.isIs_deleted() || checkList.isIs_archived())
             return true;
         else
