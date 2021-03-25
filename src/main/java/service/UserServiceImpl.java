@@ -4,17 +4,18 @@ import domain.User;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import repository.UserMapper;
 import util.JwtUtil;
+import util.SlackNotificationUtil;
 
 @Service
 public class UserServiceImpl implements UserService{
     @Autowired
     private UserMapper userMapper;
-
     @Autowired
     private JwtUtil jwtUtil;
+    @Autowired
+    private SlackNotificationUtil slackNotificationUtil;
 
     //회원가입
     @Override
@@ -45,6 +46,7 @@ public class UserServiceImpl implements UserService{
             throw new RuntimeException("등록되지 않은 비밀번호입니다.");
 
         String token = jwtUtil.generateToken(loginUser.getID());
+        slackNotificationUtil.SendNotificationMsg();
         return token;
     }
 

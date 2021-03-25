@@ -54,10 +54,12 @@ public class JwtUtil {
 
     public boolean checkToken(String userToken){
         String token = userToken.substring(7);
+        //try-catch로 잡아야됨. 테스트
         Claims claims = Jwts.parser().setSigningKey(this.key).parseClaimsJws(token).getBody();
         Date exp = claims.get("exp",Date.class);
         Date now = new Date();
-        if(exp.getTime() < now.getTime()){
+
+        if(exp.getTime() < now.getTime()) {
             return true;
         }
         else {
