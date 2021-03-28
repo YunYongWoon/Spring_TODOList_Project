@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repository.UserMapper;
 import util.JwtUtil;
-import util.SlackNotificationUtil;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -14,8 +13,6 @@ public class UserServiceImpl implements UserService{
     private UserMapper userMapper;
     @Autowired
     private JwtUtil jwtUtil;
-    @Autowired
-    private SlackNotificationUtil slackNotificationUtil;
 
     //회원가입
     @Override
@@ -46,7 +43,6 @@ public class UserServiceImpl implements UserService{
             throw new RuntimeException("등록되지 않은 비밀번호입니다.");
 
         String token = jwtUtil.generateToken(loginUser.getID());
-        slackNotificationUtil.SendNotificationMsg();
         return token;
     }
 
