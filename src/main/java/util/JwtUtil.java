@@ -33,7 +33,7 @@ public class JwtUtil {
         header.put("alg", "HS256");
 
         //1시간
-        Long expTime = 1000*60L*60L;
+        Long expTime = 1000*60L;
         Date exp = new Date();
         exp.setTime(exp.getTime() + expTime);
 
@@ -52,18 +52,22 @@ public class JwtUtil {
         return token;
     }
 
-    public boolean checkToken(String userToken){
-        String token = userToken.substring(7);
-        //try-catch로 잡아야됨. 테스트
-        Claims claims = Jwts.parser().setSigningKey(this.key).parseClaimsJws(token).getBody();
-        Date exp = claims.get("exp",Date.class);
-        Date now = new Date();
+    public void checkToken(String userToken){
+        if(userToken == null)  // 토큰이 없는경우
+            throw new RuntimeException("No Token");
 
-        if(exp.getTime() < now.getTime()) {
-            return true;
-        }
-        else {
-            return false;
+        if(userToken.length() < 10 ) // 토큰 길이가 짧을 경우
+            throw new RuntimeException("To Short");
+
+        if(!userToken.startsWith("Bearer ")) // 토큰이 Bearer 인증타입을 지키지않고 전송이 될때
+            throw new RuntimeException("Not Bearer");
+
+        String token = userToken.substring(7);
+
+        try { // 토큰의 인증 기간이 만료되었을 경우
+            Claims claims = Jwts.parser().setSigningKey(this.key).parseClaimsJws(token).getBody();
+        }catch(Exception e){
+            throw new RuntimeException("is Expired");
         }
     }
 
