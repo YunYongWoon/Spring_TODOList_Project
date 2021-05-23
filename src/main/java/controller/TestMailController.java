@@ -18,7 +18,7 @@ public class TestMailController {
         sesEmailSender.sendEmail("no-reply@xn--h50bx6qpwi02aa.com",
                 "yuyun0124@gmail.com",
                 "Email Test",
-                "<h1>Email Test</h1>)" +
+                "<h1>Email Test</h1>" +
                         "<p>Test Mail. please Click <a href='https://aws.amazon.com/ses/'>This</a></p>");
         return new ResponseEntity<String>("Mail Send", HttpStatus.OK);
     }
