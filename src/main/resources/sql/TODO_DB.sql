@@ -8,4 +8,4 @@ create table TODO_Lists(
                            updated_at TIMESTAMP default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
                            is_deleted boolean not null default 0,
                            is_finished boolean not null default 0,
-                           is_archieved boolean not null default 0);
+                           is_archived boolean not null default 0);
